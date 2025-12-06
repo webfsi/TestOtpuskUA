@@ -4,6 +4,7 @@ export interface DropdownItem {
   id: string;
   label: string;
   icon?: ReactNode;
+  imageUrl?: string;
   type?: "country" | "city" | "hotel";
 }
 

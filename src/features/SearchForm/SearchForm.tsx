@@ -1,9 +1,23 @@
-import { FC, useState, useEffect, useCallback } from "react";
+import { FC, useState, useEffect, useCallback, ReactNode } from "react";
 import { Dropdown, DropdownItem } from "../../components/ui/Dropdown";
 import { Button } from "../../components/ui/Button";
+import { CountryIcon, CityIcon, HotelIcon } from "../../components/icons";
 import { getCountries, searchGeo } from "../../api";
 import type { CountriesMap, GeoResponse } from "../../types";
 import "./SearchForm.scss";
+
+const getIconByType = (type?: string): ReactNode => {
+  switch (type) {
+    case "country":
+      return <CountryIcon size={16} />;
+    case "city":
+      return <CityIcon size={16} />;
+    case "hotel":
+      return <HotelIcon size={16} />;
+    default:
+      return null;
+  }
+};
 
 export const SearchForm: FC = () => {
   const [inputValue, setInputValue] = useState("");
@@ -19,6 +33,8 @@ export const SearchForm: FC = () => {
       id: country.id,
       label: country.name,
       type: "country" as const,
+      imageUrl: country.flag,
+      icon: !country.flag ? getIconByType("country") : undefined,
     }));
     setCountries(countryItems);
   }, []);
@@ -39,11 +55,17 @@ export const SearchForm: FC = () => {
     }
     const response = await searchGeo(query);
     const data: GeoResponse = await response.json();
-    const geoItems: DropdownItem[] = Object.values(data).map((entity) => ({
-      id: String(entity.id),
-      label: entity.name,
-      type: entity.type,
-    }));
+    const geoItems: DropdownItem[] = Object.values(data).map((entity) => {
+      const imageUrl =
+        entity.type === "country" && "flag" in entity ? entity.flag : undefined;
+      return {
+        id: String(entity.id),
+        label: entity.name,
+        type: entity.type,
+        imageUrl,
+        icon: !imageUrl ? getIconByType(entity.type) : undefined,
+      };
+    });
     setItems(geoItems);
   }, []);
 

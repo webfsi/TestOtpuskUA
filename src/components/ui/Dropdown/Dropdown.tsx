@@ -173,9 +173,15 @@ export const Dropdown: FC<DropdownProps> = ({
                 role="option"
                 aria-selected={index === highlightedIndex}
               >
-                {item.icon && (
+                {item.imageUrl ? (
+                  <img
+                    src={item.imageUrl}
+                    alt=""
+                    className="dropdown__item-image"
+                  />
+                ) : item.icon ? (
                   <span className="dropdown__item-icon">{item.icon}</span>
-                )}
+                ) : null}
                 <span className="dropdown__item-label">{item.label}</span>
               </button>
             ))
