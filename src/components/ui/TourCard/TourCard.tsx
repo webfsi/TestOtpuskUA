@@ -41,7 +41,7 @@ export const TourCard: FC<TourCardProps> = ({
           <span>Старт туру:</span> {startDate}
         </div>
         <div className="tour-card__footer">
-          <span className="tour-card__price">{price} {currency}</span>
+          <span className="tour-card__price">{price.toLocaleString("uk-UA")} {currency}</span>
           <a href={`/tour/${priceId}`} className="tour-card__link">Відкрити ціну</a>
         </div>
       </div>
