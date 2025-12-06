@@ -3,6 +3,7 @@ import { Input } from "../../components/ui/Input";
 import { Button } from "../../components/ui/Button";
 import { Dropdown, DropdownItem } from "../../components/ui/Dropdown";
 import { Loader } from "../../components/ui/Loader";
+import { Message } from "../../components/ui/Message";
 import "./UIKit.scss";
 import { mockCountries } from "../../mocks";
 
@@ -34,6 +35,16 @@ function UIKit() {
           <Loader size="sm" />
           <Loader size="md" />
           <Loader size="lg" />
+        </div>
+      </section>
+
+      <section className="ui-kit__section">
+        <h2>Message</h2>
+        <div className="ui-kit__messages">
+          <Message variant="info">Info message</Message>
+          <Message variant="success">Success message</Message>
+          <Message variant="warning">Warning message</Message>
+          <Message variant="error">Error message</Message>
         </div>
       </section>
 

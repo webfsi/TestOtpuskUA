@@ -1,4 +1,4 @@
-@import "../../../styles/variables.scss";
+@use "../../../styles/variables.scss" as *;
 
 .loader {
   display: flex;
@@ -43,4 +43,3 @@
     transform: rotate(360deg);
   }
 }
-
