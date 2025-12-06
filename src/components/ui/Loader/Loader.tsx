@@ -7,7 +7,6 @@ interface LoaderProps {
 }
 
 export const Loader: FC<LoaderProps> = ({ size = "md", className }) => {
-  console.log("ldr");
   return (
     <div className={`loader loader--${size} ${className || ""}`}>
       <div className="loader__spinner" />
