@@ -1,0 +1,75 @@
+@use '../../styles/variables.scss' as *;
+@use '../../styles/mixins.scss' as *;
+
+.ui-kit {
+	padding: $spacing-32;
+	max-width: 1200px;
+	margin: 0 auto;
+
+	&__section {
+		margin-top: $spacing-40;
+		padding: $spacing-24;
+		background-color: $color-background-card;
+		border-radius: $border-radius-lg;
+		box-shadow: $shadow-base;
+
+		> h2 {
+			margin-bottom: $spacing-16;
+		}
+
+		h1, h3, h4 {
+			margin-top: $spacing-12;
+		}
+
+		p {
+			margin-top: $spacing-8;
+		}
+
+		a {
+			display: inline-block;
+			margin-top: $spacing-8;
+			color: $color-primary;
+
+			&:hover {
+				color: $color-primary-hover;
+			}
+		}
+	}
+
+	&__colors {
+		display: flex;
+		flex-wrap: wrap;
+		gap: $spacing-16;
+	}
+
+	&__color {
+		@include flex-center;
+		width: 120px;
+		height: 80px;
+		border-radius: $border-radius-base;
+		color: $color-text-inverse;
+		font-weight: $font-weight-medium;
+		font-size: $font-size-sm;
+
+		&--primary {
+			background-color: $color-primary;
+		}
+
+		&--success {
+			background-color: $color-success;
+		}
+
+		&--warning {
+			background-color: $color-warning;
+			color: $color-text-primary;
+		}
+
+		&--error {
+			background-color: $color-error;
+		}
+
+		&--info {
+			background-color: $color-info;
+		}
+	}
+}
