@@ -7,4 +7,4 @@ export {
   getHotels,
   getHotel,
   getPrice,
-} from "./api";
+} from "./mainApi";
