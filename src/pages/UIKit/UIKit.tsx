@@ -5,7 +5,15 @@ import { Dropdown, DropdownItem } from "../../components/ui/Dropdown";
 import { Loader } from "../../components/ui/Loader";
 import { Message } from "../../components/ui/Message";
 import { TourCard } from "../../components/ui/TourCard";
+import { ServiceBadge } from "../../components/ui/ServiceBadge";
 import { SearchResults } from "../../features/SearchResults";
+import {
+  WifiIcon,
+  PoolIcon,
+  TennisIcon,
+  LaundryIcon,
+  ParkingIcon,
+} from "../../components/icons";
 import "./UIKit.scss";
 import { mockCountries } from "../../mocks";
 
@@ -145,6 +153,17 @@ function UIKit() {
             <h4>Empty state:</h4>
             <SearchResults isEmpty emptyText="За вашим запитом турів не знайдено" />
           </div>
+        </div>
+      </section>
+
+      <section className="ui-kit__section">
+        <h2>ServiceBadge</h2>
+        <div className="ui-kit__services">
+          <ServiceBadge icon={<WifiIcon size={16} />} label="Wi-Fi" />
+          <ServiceBadge icon={<PoolIcon size={16} />} label="Басейн" />
+          <ServiceBadge icon={<TennisIcon size={16} />} label="Теніс" />
+          <ServiceBadge icon={<LaundryIcon size={16} />} label="Пральня" />
+          <ServiceBadge icon={<ParkingIcon size={16} />} label="Парковка" />
         </div>
       </section>
 

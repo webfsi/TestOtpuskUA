@@ -116,6 +116,12 @@
     }
   }
 
+  &__services {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-12;
+  }
+
   &__tour-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
