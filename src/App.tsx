@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home/Home";
-import About from "./pages/About/About";
 import UIKit from "./pages/UIKit/UIKit";
 import { SearchProvider } from "./context";
 
@@ -25,9 +24,6 @@ function App() {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
               <Link to="/ui-kit">UI Kit</Link>
             </li>
           </ul>
@@ -35,7 +31,6 @@ function App() {
         <main style={{ padding: "0" }}>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
             <Route path="/ui-kit" element={<UIKit />} />
           </Routes>
         </main>

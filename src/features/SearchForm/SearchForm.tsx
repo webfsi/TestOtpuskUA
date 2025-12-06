@@ -25,12 +25,15 @@ export const SearchForm: FC<SearchFormProps> = ({
   placeholder = "Оберіть напрямок",
   buttonText = "Знайти",
   emptyText = "Нічого не знайдено",
+  initialSelected,
   onSubmit,
   getIconByType = defaultGetIconByType,
   className = "",
 }) => {
-  const [inputValue, setInputValue] = useState("");
-  const [selectedItem, setSelectedItem] = useState<DropdownItem | null>(null);
+  const [inputValue, setInputValue] = useState(initialSelected?.label || "");
+  const [selectedItem, setSelectedItem] = useState<DropdownItem | null>(
+    initialSelected || null
+  );
   const [items, setItems] = useState<DropdownItem[]>([]);
   const [countries, setCountries] = useState<DropdownItem[]>([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -51,6 +54,13 @@ export const SearchForm: FC<SearchFormProps> = ({
   useEffect(() => {
     loadCountries();
   }, [loadCountries]);
+
+  useEffect(() => {
+    if (initialSelected) {
+      setInputValue(initialSelected.label);
+      setSelectedItem(initialSelected);
+    }
+  }, [initialSelected]);
 
   useEffect(() => {
     if (selectedItem && inputValue !== selectedItem.label) {

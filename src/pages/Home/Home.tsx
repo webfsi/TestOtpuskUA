@@ -41,7 +41,11 @@ function Home() {
 
   return (
     <div className="container container--gap">
-      <SearchForm title="Форма пошуку турів" onSubmit={search} />
+      <SearchForm
+        title="Форма пошуку турів"
+        initialSelected={selectedCountry}
+        onSubmit={search}
+      />
       <SearchResults
         isLoading={isLoading}
         error={error}

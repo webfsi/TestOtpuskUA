@@ -9,6 +9,7 @@ interface SearchState {
 }
 
 const MAX_RETRIES = 2;
+const cache: Record<string, Record<string, Price>> = {};
 
 export const useSearchPrices = () => {
   const [state, setState] = useState<SearchState>({
@@ -55,6 +56,11 @@ export const useSearchPrices = () => {
   };
 
   const search = useCallback(async (countryId: string) => {
+    if (cache[countryId]) {
+      setState({ isLoading: false, error: null, data: cache[countryId] });
+      return;
+    }
+
     abortedRef.current = false;
     setState({ isLoading: true, error: null, data: null });
 
@@ -67,6 +73,8 @@ export const useSearchPrices = () => {
       if (waitMs > 0) await wait(waitMs);
 
       const prices = await fetchPrices(json.token);
+
+      cache[countryId] = prices;
 
       if (!abortedRef.current) {
         setState({ isLoading: false, error: null, data: prices });
