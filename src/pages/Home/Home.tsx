@@ -34,6 +34,7 @@ function Home() {
             price={price.amount}
             currency={price.currency === "usd" ? "$" : "грн"}
             priceId={price.id}
+            hotelId={price.hotelID}
           />
         );
       })

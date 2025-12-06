@@ -180,6 +180,7 @@ function UIKit() {
             price={12345}
             currency="грн"
             priceId="price-123"
+            hotelId="hotel-1"
           />
           <TourCard
             hotelName="Rixos Premium Bodrum"
@@ -191,6 +192,7 @@ function UIKit() {
             price={45600}
             currency="грн"
             priceId="price-456"
+            hotelId="hotel-2"
           />
         </div>
       </section>
