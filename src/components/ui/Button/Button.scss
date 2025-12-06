@@ -1,0 +1,55 @@
+@use "../../../styles/variables.scss" as *;
+@use "../../../styles/mixins.scss" as *;
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 20px;
+  font-family: $font1;
+  font-weight: $font-weight-medium;
+  border-radius: $border-radius-base;
+  transition: background-color $transition-base, border-color $transition-base;
+  white-space: nowrap;
+
+  &--sm {
+    padding: 9px $spacing-16;
+    font-size: $font-size-sm;
+  }
+
+  &--md {
+    padding: 13px $spacing-24;
+    font-size: $font-size-base;
+  }
+
+  &--lg {
+    padding: 17px $spacing-32;
+    font-size: $font-size-lg;
+  }
+
+  &--primary {
+    color: $color-text-inverse;
+    background-color: $color-primary;
+
+    &:hover:not(:disabled) {
+      background-color: $color-primary-hover;
+    }
+  }
+
+  &--secondary {
+    color: $color-text-primary;
+    background-color: $color-background-card;
+    border: 1px solid $color-border;
+
+    &:hover:not(:disabled) {
+      background-color: $color-gray-50;
+      border-color: $color-gray-300;
+    }
+  }
+
+  &--disabled,
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}

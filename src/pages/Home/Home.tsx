@@ -1,11 +1,10 @@
-import ExampleComponent from "../../components/ExampleComponent/ExampleComponent";
+import { SearchForm } from "../../features/SearchForm";
+import "./Home.scss";
 
 function Home() {
   return (
-    <div>
-      <h1>Home Page</h1>
-      <p>Welcome to the home page!</p>
-      <ExampleComponent />
+    <div className="home">
+      <SearchForm title="Форма пошуку турів" />
     </div>
   );
 }
