@@ -5,7 +5,12 @@ import UIKit from "./pages/UIKit/UIKit";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter
+      future={{
+        v7_startTransition: true,
+        v7_relativeSplatPath: true,
+      }}
+    >
       <nav
         style={{
           padding: "1rem",

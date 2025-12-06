@@ -4,7 +4,7 @@ import "./Home.scss";
 function Home() {
   return (
     <div className="home">
-      <SearchForm />
+      <SearchForm title="Форма пошуку турів" />
     </div>
   );
 }

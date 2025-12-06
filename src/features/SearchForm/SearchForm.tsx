@@ -4,9 +4,10 @@ import { Button } from "../../components/ui/Button";
 import { CountryIcon, CityIcon, HotelIcon } from "../../components/icons";
 import { getCountries, searchGeo } from "../../api";
 import type { CountriesMap, GeoResponse } from "../../types";
+import type { SearchFormProps } from "./SearchForm.types";
 import "./SearchForm.scss";
 
-const getIconByType = (type?: string): ReactNode => {
+const defaultGetIconByType = (type?: string): ReactNode => {
   switch (type) {
     case "country":
       return <CountryIcon size={16} />;
@@ -19,7 +20,15 @@ const getIconByType = (type?: string): ReactNode => {
   }
 };
 
-export const SearchForm: FC = () => {
+export const SearchForm: FC<SearchFormProps> = ({
+  title,
+  placeholder = "Оберіть напрямок",
+  buttonText = "Знайти",
+  emptyText = "Нічого не знайдено",
+  onSubmit,
+  getIconByType = defaultGetIconByType,
+  className = "",
+}) => {
   const [inputValue, setInputValue] = useState("");
   const [selectedItem, setSelectedItem] = useState<DropdownItem | null>(null);
   const [items, setItems] = useState<DropdownItem[]>([]);
@@ -37,7 +46,7 @@ export const SearchForm: FC = () => {
       icon: !country.flag ? getIconByType("country") : undefined,
     }));
     setCountries(countryItems);
-  }, []);
+  }, [getIconByType]);
 
   useEffect(() => {
     loadCountries();
@@ -49,25 +58,30 @@ export const SearchForm: FC = () => {
     }
   }, [inputValue, selectedItem]);
 
-  const handleSearch = useCallback(async (query: string) => {
-    if (!query.trim()) {
-      return;
-    }
-    const response = await searchGeo(query);
-    const data: GeoResponse = await response.json();
-    const geoItems: DropdownItem[] = Object.values(data).map((entity) => {
-      const imageUrl =
-        entity.type === "country" && "flag" in entity ? entity.flag : undefined;
-      return {
-        id: String(entity.id),
-        label: entity.name,
-        type: entity.type,
-        imageUrl,
-        icon: !imageUrl ? getIconByType(entity.type) : undefined,
-      };
-    });
-    setItems(geoItems);
-  }, []);
+  const handleSearch = useCallback(
+    async (query: string) => {
+      if (!query.trim()) {
+        return;
+      }
+      const response = await searchGeo(query);
+      const data: GeoResponse = await response.json();
+      const geoItems: DropdownItem[] = Object.values(data).map((entity) => {
+        const imageUrl =
+          entity.type === "country" && "flag" in entity
+            ? entity.flag
+            : undefined;
+        return {
+          id: String(entity.id),
+          label: entity.name,
+          type: entity.type,
+          imageUrl,
+          icon: !imageUrl ? getIconByType(entity.type) : undefined,
+        };
+      });
+      setItems(geoItems);
+    },
+    [getIconByType]
+  );
 
   const handleInputChange = (value: string) => {
     setInputValue(value);
@@ -80,8 +94,14 @@ export const SearchForm: FC = () => {
 
   const handleOpenChange = (isOpen: boolean) => {
     setIsDropdownOpen(isOpen);
-    if (isOpen && !inputValue.trim()) {
-      setItems(countries);
+    if (isOpen) {
+      if (!inputValue.trim()) {
+        setItems(countries);
+      } else if (selectedItem?.type === "country") {
+        setItems(countries);
+      } else if (inputValue.trim()) {
+        handleSearch(inputValue);
+      }
     }
   };
 
@@ -93,27 +113,30 @@ export const SearchForm: FC = () => {
     e.preventDefault();
     if (selectedItem) {
       console.log("Search:", selectedItem);
+      onSubmit?.(selectedItem);
     }
   };
 
+  const formClasses = ["search-form", className].filter(Boolean).join(" ");
+
   return (
-    <form className="search-form" onSubmit={handleSubmit}>
-      <h1 className="search-form__title">Форма пошуку турів</h1>
+    <form className={formClasses} onSubmit={handleSubmit}>
+      {title && <h1 className="search-form__title">{title}</h1>}
       <div className="search-form__content">
         <div className="search-form__field">
           <Dropdown
-            placeholder="Оберіть напрямок"
+            placeholder={placeholder}
             value={inputValue}
             onChange={handleInputChange}
             onSelect={handleSelect}
             items={items}
             isOpen={isDropdownOpen}
             onOpenChange={handleOpenChange}
-            emptyText="Нічого не знайдено"
+            emptyText={emptyText}
           />
         </div>
         <Button type="submit" size="md" disabled={!selectedItem}>
-          Знайти
+          {buttonText}
         </Button>
       </div>
     </form>
