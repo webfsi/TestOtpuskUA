@@ -1,2 +1,2 @@
-export * from "./useSearchPrices";
-
+export { useSearchPrices } from "./useSearchPrices";
+export { useHotels } from "./useHotels";
