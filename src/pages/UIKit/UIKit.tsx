@@ -1,16 +1,67 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Input } from "../../components/ui/Input";
+import { Dropdown, DropdownItem } from "../../components/ui/Dropdown";
 import "./UIKit.scss";
+
+const mockCountries: DropdownItem[] = [
+  { id: "1", label: "Польша" },
+  { id: "2", label: "Чехія" },
+  { id: "3", label: "Греція" },
+  { id: "4", label: "Франція" },
+  { id: "5", label: "Німетчина" },
+  { id: "6", label: "Швейцарія" },
+  { id: "7", label: "Швеція" },
+  { id: "8", label: "іспанія" },
+];
 
 function UIKit() {
   const [inputValue, setInputValue] = useState("");
-  // console.log(inputValue);
+  const [dropdownValue, setDropdownValue] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState<DropdownItem | null>(
+    null
+  );
+
+  const filteredCountries = mockCountries.filter((country) =>
+    country.label.includes(dropdownValue)
+  );
+
+  useEffect(() => {
+    console.log("drpdwn-start:", selectedCountry);
+    console.log("drpdwn-start2:", filteredCountries);
+  }, [selectedCountry, filteredCountries]);
+
+  const handleCountrySelect = (item: DropdownItem) => {
+    setSelectedCountry(item);
+    console.log("drpdwn:", item);
+  };
+
   return (
     <div className="ui-kit">
       <h1>UI Kit</h1>
       <p className="ui-kit__description">
         Сторінка для перегляду UI компонентів
       </p>
+
+      <section className="ui-kit__section">
+        <h2>Dropdown</h2>
+        <div className="ui-kit__dropdown-demo">
+          <Dropdown
+            label="Виберіть країну"
+            placeholder="Введіть назву країни..."
+            value={dropdownValue}
+            onChange={setDropdownValue}
+            onSelect={handleCountrySelect}
+            items={filteredCountries}
+            emptyText="Країну не знайдено"
+          />
+          {selectedCountry && (
+            <p className="ui-kit__selected">
+              Вибрано: <strong>{selectedCountry.label}</strong> (id:{" "}
+              {selectedCountry.id})
+            </p>
+          )}
+        </div>
+      </section>
 
       <section className="ui-kit__section">
         <h2>Input</h2>

@@ -41,6 +41,15 @@
 		}
 	}
 
+	&__dropdown-demo {
+		max-width: 400px;
+	}
+
+	&__selected {
+		margin-top: $spacing-16;
+		color: $color-text-secondary;
+	}
+
 	&__inputs {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
