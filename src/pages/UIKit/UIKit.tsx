@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Input } from "../../components/ui/Input";
 import { Button } from "../../components/ui/Button";
 import { Dropdown, DropdownItem } from "../../components/ui/Dropdown";
+import { Loader } from "../../components/ui/Loader";
 import "./UIKit.scss";
 import { mockCountries } from "../../mocks";
 
@@ -26,6 +27,15 @@ function UIKit() {
       <p className="ui-kit__description">
         Сторінка для перегляду UI компонентів
       </p>
+
+      <section className="ui-kit__section">
+        <h2>Loader</h2>
+        <div className="ui-kit__loaders">
+          <Loader size="sm" />
+          <Loader size="md" />
+          <Loader size="lg" />
+        </div>
+      </section>
 
       <section className="ui-kit__section">
         <h2>Button</h2>
@@ -56,7 +66,7 @@ function UIKit() {
       </section>
 
       <section className="ui-kit__section">
-        <h2>Input + Button (однакова висота)</h2>
+        <h2>Input + Button</h2>
         <div className="ui-kit__input-button">
           <Input placeholder="Small input" size="sm" />
           <Button size="sm">SM</Button>

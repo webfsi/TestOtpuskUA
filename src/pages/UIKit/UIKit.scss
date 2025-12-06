@@ -43,6 +43,12 @@
     }
   }
 
+  &__loaders {
+    display: flex;
+    align-items: center;
+    gap: $spacing-24;
+  }
+
   &__buttons {
     display: flex;
     flex-direction: column;
