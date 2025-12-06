@@ -1,17 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Input } from "../../components/ui/Input";
+import { Button } from "../../components/ui/Button";
 import { Dropdown, DropdownItem } from "../../components/ui/Dropdown";
 import "./UIKit.scss";
 
 const mockCountries: DropdownItem[] = [
-  { id: "1", label: "Польша" },
-  { id: "2", label: "Чехія" },
+  { id: "1", label: "Єгипет" },
+  { id: "2", label: "Туреччина" },
   { id: "3", label: "Греція" },
-  { id: "4", label: "Франція" },
-  { id: "5", label: "Німетчина" },
-  { id: "6", label: "Швейцарія" },
-  { id: "7", label: "Швеція" },
-  { id: "8", label: "іспанія" },
+  { id: "4", label: "Іспанія" },
+  { id: "5", label: "Італія" },
 ];
 
 function UIKit() {
@@ -22,17 +20,11 @@ function UIKit() {
   );
 
   const filteredCountries = mockCountries.filter((country) =>
-    country.label.includes(dropdownValue)
+    country.label.toLowerCase().includes(dropdownValue.toLowerCase())
   );
-
-  useEffect(() => {
-    console.log("drpdwn-start:", selectedCountry);
-    console.log("drpdwn-start2:", filteredCountries);
-  }, [selectedCountry, filteredCountries]);
 
   const handleCountrySelect = (item: DropdownItem) => {
     setSelectedCountry(item);
-    console.log("drpdwn:", item);
   };
 
   return (
@@ -41,6 +33,42 @@ function UIKit() {
       <p className="ui-kit__description">
         Сторінка для перегляду UI компонентів
       </p>
+
+      <section className="ui-kit__section">
+        <h2>Button</h2>
+        <div className="ui-kit__buttons">
+          <div className="ui-kit__button-row">
+            <Button size="sm">Small</Button>
+            <Button size="md">Medium</Button>
+            <Button size="lg">Large</Button>
+          </div>
+          <div className="ui-kit__button-row">
+            <Button variant="secondary" size="sm">Secondary SM</Button>
+            <Button variant="secondary" size="md">Secondary MD</Button>
+            <Button variant="secondary" size="lg">Secondary LG</Button>
+          </div>
+          <div className="ui-kit__button-row">
+            <Button disabled>Disabled</Button>
+            <Button variant="secondary" disabled>Disabled Secondary</Button>
+          </div>
+        </div>
+      </section>
+
+      <section className="ui-kit__section">
+        <h2>Input + Button (однакова висота)</h2>
+        <div className="ui-kit__input-button">
+          <Input placeholder="Small input" size="sm" />
+          <Button size="sm">SM</Button>
+        </div>
+        <div className="ui-kit__input-button">
+          <Input placeholder="Medium input" size="md" />
+          <Button size="md">MD</Button>
+        </div>
+        <div className="ui-kit__input-button">
+          <Input placeholder="Large input" size="lg" />
+          <Button size="lg">LG</Button>
+        </div>
+      </section>
 
       <section className="ui-kit__section">
         <h2>Dropdown</h2>

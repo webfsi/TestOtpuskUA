@@ -1,99 +1,126 @@
-@use '../../styles/variables.scss' as *;
-@use '../../styles/mixins.scss' as *;
+@use "../../styles/variables.scss" as *;
+@use "../../styles/mixins.scss" as *;
 
 .ui-kit {
-	padding: $spacing-32;
-	max-width: 1200px;
-	margin: 0 auto;
+  padding: $spacing-32;
+  max-width: 1200px;
+  margin: 0 auto;
 
-	&__description {
-		color: $color-text-secondary;
-		margin-top: $spacing-8;
-	}
+  &__description {
+    color: $color-text-secondary;
+    margin-top: $spacing-8;
+  }
 
-	&__section {
-		margin-top: $spacing-40;
-		padding: $spacing-24;
-		background-color: $color-background-card;
-		border-radius: $border-radius-lg;
-		box-shadow: $shadow-base;
+  &__section {
+    margin-top: $spacing-40;
+    padding: $spacing-24;
+    background-color: $color-background-card;
+    border-radius: $border-radius-lg;
+    box-shadow: $shadow-base;
 
-		> h2 {
-			margin-bottom: $spacing-16;
-		}
+    > h2 {
+      margin-bottom: $spacing-16;
+    }
 
-		h1, h3, h4 {
-			margin-top: $spacing-12;
-		}
+    h1,
+    h3,
+    h4 {
+      margin-top: $spacing-12;
+    }
 
-		p {
-			margin-top: $spacing-8;
-		}
+    p {
+      margin-top: $spacing-8;
+    }
 
-		a {
-			display: inline-block;
-			margin-top: $spacing-8;
-			color: $color-primary;
+    a {
+      display: inline-block;
+      margin-top: $spacing-8;
+      color: $color-primary;
 
-			&:hover {
-				color: $color-primary-hover;
-			}
-		}
-	}
+      &:hover {
+        color: $color-primary-hover;
+      }
+    }
+  }
 
-	&__dropdown-demo {
-		max-width: 400px;
-	}
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-16;
+  }
 
-	&__selected {
-		margin-top: $spacing-16;
-		color: $color-text-secondary;
-	}
+  &__button-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $spacing-12;
+  }
 
-	&__inputs {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: $spacing-24;
+  &__input-button {
+    display: flex;
+    align-items: flex-end;
+    gap: $spacing-12;
+    margin-top: $spacing-16;
 
-		@include tablet {
-			grid-template-columns: 1fr;
-		}
-	}
+    .input-wrapper {
+      flex: 1;
+      max-width: 300px;
+    }
+  }
 
-	&__colors {
-		display: flex;
-		flex-wrap: wrap;
-		gap: $spacing-16;
-	}
+  &__dropdown-demo {
+    max-width: 400px;
+  }
 
-	&__color {
-		@include flex-center;
-		width: 120px;
-		height: 80px;
-		border-radius: $border-radius-base;
-		color: $color-text-inverse;
-		font-weight: $font-weight-medium;
-		font-size: $font-size-sm;
+  &__selected {
+    margin-top: $spacing-16;
+    color: $color-text-secondary;
+  }
 
-		&--primary {
-			background-color: $color-primary;
-		}
+  &__inputs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-24;
 
-		&--success {
-			background-color: $color-success;
-		}
+    @include tablet {
+      grid-template-columns: 1fr;
+    }
+  }
 
-		&--warning {
-			background-color: $color-warning;
-			color: $color-text-primary;
-		}
+  &__colors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-16;
+  }
 
-		&--error {
-			background-color: $color-error;
-		}
+  &__color {
+    @include flex-center;
+    width: 120px;
+    height: 80px;
+    border-radius: $border-radius-base;
+    color: $color-text-inverse;
+    font-weight: $font-weight-medium;
+    font-size: $font-size-sm;
 
-		&--info {
-			background-color: $color-info;
-		}
-	}
+    &--primary {
+      background-color: $color-primary;
+    }
+
+    &--success {
+      background-color: $color-success;
+    }
+
+    &--warning {
+      background-color: $color-warning;
+      color: $color-text-primary;
+    }
+
+    &--error {
+      background-color: $color-error;
+    }
+
+    &--info {
+      background-color: $color-info;
+    }
+  }
 }
