@@ -1,24 +1,13 @@
 import { FC, useState } from "react";
 import { Dropdown, DropdownItem } from "../../components/ui/Dropdown";
 import { Button } from "../../components/ui/Button";
+import { mockCountries } from "../../mocks";
+import type { SelectedCountry } from "./SearchForm.types";
 import "./SearchForm.scss";
-
-const mockCountries: DropdownItem[] = [
-  { id: "1", label: "Єгипет" },
-  { id: "2", label: "Туреччина" },
-  { id: "3", label: "Греція" },
-  { id: "4", label: "Іспанія" },
-  { id: "5", label: "Італія" },
-  { id: "6", label: "Хорватія" },
-  { id: "7", label: "Чорногорія" },
-  { id: "8", label: "Болгарія" },
-];
 
 export const SearchForm: FC = () => {
   const [inputValue, setInputValue] = useState("");
-  const [selectedCountry, setSelectedCountry] = useState<DropdownItem | null>(
-    null
-  );
+  const [selectedCountry, setSelectedCountry] = useState<SelectedCountry>(null);
 
   const filteredCountries = mockCountries.filter((country) =>
     country.label.includes(inputValue)

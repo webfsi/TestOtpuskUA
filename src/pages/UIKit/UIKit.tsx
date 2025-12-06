@@ -3,14 +3,7 @@ import { Input } from "../../components/ui/Input";
 import { Button } from "../../components/ui/Button";
 import { Dropdown, DropdownItem } from "../../components/ui/Dropdown";
 import "./UIKit.scss";
-
-const mockCountries: DropdownItem[] = [
-  { id: "1", label: "Єгипет" },
-  { id: "2", label: "Туреччина" },
-  { id: "3", label: "Греція" },
-  { id: "4", label: "Іспанія" },
-  { id: "5", label: "Італія" },
-];
+import { mockCountries } from "../../mocks";
 
 function UIKit() {
   const [inputValue, setInputValue] = useState("");
@@ -43,13 +36,21 @@ function UIKit() {
             <Button size="lg">Large</Button>
           </div>
           <div className="ui-kit__button-row">
-            <Button variant="secondary" size="sm">Secondary SM</Button>
-            <Button variant="secondary" size="md">Secondary MD</Button>
-            <Button variant="secondary" size="lg">Secondary LG</Button>
+            <Button variant="secondary" size="sm">
+              Secondary SM
+            </Button>
+            <Button variant="secondary" size="md">
+              Secondary MD
+            </Button>
+            <Button variant="secondary" size="lg">
+              Secondary LG
+            </Button>
           </div>
           <div className="ui-kit__button-row">
             <Button disabled>Disabled</Button>
-            <Button variant="secondary" disabled>Disabled Secondary</Button>
+            <Button variant="secondary" disabled>
+              Disabled Secondary
+            </Button>
           </div>
         </div>
       </section>
