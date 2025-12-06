@@ -4,6 +4,7 @@ import { Button } from "../../components/ui/Button";
 import { Dropdown, DropdownItem } from "../../components/ui/Dropdown";
 import { Loader } from "../../components/ui/Loader";
 import { Message } from "../../components/ui/Message";
+import { SearchResults } from "../../features/SearchResults";
 import "./UIKit.scss";
 import { mockCountries } from "../../mocks";
 
@@ -125,6 +126,24 @@ function UIKit() {
           <Input label="Small" placeholder="Small input" size="sm" />
           <Input label="Large" placeholder="Large input" size="lg" />
           <Input label="Disabled" placeholder="Disabled input" disabled />
+        </div>
+      </section>
+
+      <section className="ui-kit__section">
+        <h2>SearchResults</h2>
+        <div className="ui-kit__search-results">
+          <div>
+            <h4>Loading state:</h4>
+            <SearchResults isLoading />
+          </div>
+          <div>
+            <h4>Error state:</h4>
+            <SearchResults error="Помилка завантаження. Спробуйте пізніше." />
+          </div>
+          <div>
+            <h4>Empty state:</h4>
+            <SearchResults isEmpty emptyText="За вашим запитом турів не знайдено" />
+          </div>
         </div>
       </section>
 

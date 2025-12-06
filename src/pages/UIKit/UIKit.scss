@@ -99,6 +99,22 @@
     }
   }
 
+  &__search-results {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-24;
+
+    > div {
+      border: 1px solid $color-border;
+      border-radius: $border-radius-base;
+      padding: $spacing-16;
+
+      h4 {
+        margin: 0 0 $spacing-8 0;
+      }
+    }
+  }
+
   &__colors {
     display: flex;
     flex-wrap: wrap;
