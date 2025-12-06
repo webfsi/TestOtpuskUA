@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { SearchForm } from "../../features/SearchForm";
 import { SearchResults } from "../../features/SearchResults";
 import { useSearchPrices } from "../../hooks";
@@ -5,7 +6,13 @@ import { DropdownItem } from "../../components/ui/Dropdown";
 import "./Home.scss";
 
 function Home() {
-  const { isLoading, error, data, search } = useSearchPrices();
+  const { isLoading, error, data, search, abort } = useSearchPrices();
+
+  useEffect(() => {
+    return () => {
+      abort();
+    };
+  }, [abort]);
 
   const handleSearch = (item: DropdownItem) => {
     if (item.type === "country") {
