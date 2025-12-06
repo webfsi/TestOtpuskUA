@@ -10,7 +10,9 @@ import "./Home.scss";
 function Home() {
   const { isLoading, error, data, search, abort } = useSearchPrices();
   const { data: hotels, fetch: fetchHotels } = useHotels();
-  const [countryId, setCountryId] = useState<string | null>(null);
+  const [selectedCountry, setSelectedCountry] = useState<DropdownItem | null>(
+    null
+  );
 
   useEffect(() => {
     return () => {
@@ -19,14 +21,14 @@ function Home() {
   }, [abort]);
 
   useEffect(() => {
-    if (data && countryId) {
-      fetchHotels(countryId);
+    if (data && selectedCountry) {
+      fetchHotels(selectedCountry.id);
     }
-  }, [data, countryId, fetchHotels]);
+  }, [data, selectedCountry, fetchHotels]);
 
   const handleSearch = (item: DropdownItem) => {
     if (item.type === "country") {
-      setCountryId(item.id);
+      setSelectedCountry(item);
       search(item.id);
     }
   };
@@ -46,6 +48,7 @@ function Home() {
             hotelImage={hotel.img}
             cityName={hotel.cityName}
             countryName={hotel.countryName}
+            countryFlag={selectedCountry?.imageUrl}
             startDate={formatDate(price.startDate)}
             price={price.amount}
             currency={price.currency === "usd" ? "$" : "грн"}
@@ -56,18 +59,19 @@ function Home() {
     : null;
 
   return (
-    <div className="home">
-      <SearchForm title="Форма пошуку турів" onSubmit={handleSearch} />
-
-      <SearchResults
-        isLoading={isLoading}
-        error={error}
-        isEmpty={isEmpty}
-        emptyText="За вашим запитом турів не знайдено"
-      >
-        {tourCards && <div className="home__cards">{tourCards}</div>}
-      </SearchResults>
-    </div>
+    <>
+      <div className="container container--gap">
+        <SearchForm title="Форма пошуку турів" onSubmit={handleSearch} />
+        <SearchResults
+          isLoading={isLoading}
+          error={error}
+          isEmpty={isEmpty}
+          emptyText="За вашим запитом турів не знайдено"
+        >
+          {tourCards && <div className="cards">{tourCards}</div>}
+        </SearchResults>
+      </div>
+    </>
   );
 }
 

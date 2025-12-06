@@ -1,15 +1,22 @@
 @use "../../../styles/variables.scss" as *;
+@use "../../../styles/mixins.scss" as *;
 
 .tour-card {
   background: $color-background-card;
   border: 1px solid $color-border;
   border-radius: $border-radius-base;
   overflow: hidden;
+  padding: 15px;
+  border-radius: 8px;
+  display: block;
+  flex: 1 1 0;
 
   &__image {
     width: 100%;
-    height: 160px;
+    max-height: 260px;
+    aspect-ratio: 16/9;
     overflow: hidden;
+    border-radius: 8px;
 
     img {
       width: 100%;
@@ -19,22 +26,24 @@
   }
 
   &__content {
-    padding: $spacing-16;
+    padding: $spacing-16 0 0;
   }
 
   &__name {
-    font-size: $font-size-base;
+    font-size: $font-size-lg;
     font-weight: $font-weight-semibold;
     color: $color-text-primary;
     margin: 0 0 $spacing-8 0;
+    font-weight: 700;
   }
 
   &__location {
     display: flex;
     align-items: center;
     gap: $spacing-8;
+    font-weight: 600;
     font-size: $font-size-sm;
-    color: $color-text-secondary;
+    color: $color-text-primary;
     margin-bottom: $spacing-8;
   }
 
@@ -47,24 +56,28 @@
 
   &__date {
     font-size: $font-size-sm;
-    color: $color-text-secondary;
+    color: $color-text-primary;
     margin-bottom: $spacing-12;
+    font-weight: 700;
 
     span {
-      color: $color-text-muted;
+      font-weight: 300;
+      @include mobile {
+        display: block;
+      }
     }
   }
 
   &__footer {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    gap: 4px;
+    flex-direction: column;
   }
 
   &__price {
     font-size: $font-size-lg;
     font-weight: $font-weight-bold;
-    color: $color-primary;
+    color: $color-text-primary;
   }
 
   &__link {
@@ -77,4 +90,3 @@
     }
   }
 }
-
