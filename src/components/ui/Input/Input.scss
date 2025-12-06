@@ -1,0 +1,56 @@
+@use '../../../styles/variables.scss' as *;
+@use '../../../styles/mixins.scss' as *;
+
+.input-wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: $spacing-4;
+}
+
+.input__label {
+	font-size: $font-size-sm;
+	font-weight: $font-weight-medium;
+	color: $color-text-primary;
+}
+
+.input {
+	width: 100%;
+	font-family: $font1;
+	font-size: $font-size-base;
+	color: $color-text-primary;
+	background-color: $color-background-card;
+	border: 1px solid $color-border;
+	border-radius: $border-radius-base;
+	transition: border-color $transition-base, box-shadow $transition-base;
+
+	&::placeholder {
+		color: $color-text-muted;
+	}
+
+	&:focus {
+		outline: none;
+		border-color: $color-border-focus;
+		box-shadow: 0 0 0 3px $color-primary-light;
+	}
+
+	&--sm {
+		padding: $spacing-8 $spacing-12;
+		font-size: $font-size-sm;
+	}
+
+	&--md {
+		padding: $spacing-12 $spacing-16;
+	}
+
+	&--lg {
+		padding: $spacing-16 $spacing-20;
+		font-size: $font-size-lg;
+	}
+
+	&--disabled {
+		background-color: $color-gray-100;
+		cursor: not-allowed;
+		opacity: 0.6;
+	}
+}
+

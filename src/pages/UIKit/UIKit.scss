@@ -6,6 +6,11 @@
 	max-width: 1200px;
 	margin: 0 auto;
 
+	&__description {
+		color: $color-text-secondary;
+		margin-top: $spacing-8;
+	}
+
 	&__section {
 		margin-top: $spacing-40;
 		padding: $spacing-24;
@@ -33,6 +38,16 @@
 			&:hover {
 				color: $color-primary-hover;
 			}
+		}
+	}
+
+	&__inputs {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: $spacing-24;
+
+		@include tablet {
+			grid-template-columns: 1fr;
 		}
 	}
 
