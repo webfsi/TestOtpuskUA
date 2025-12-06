@@ -259,6 +259,16 @@ export const searchGeo = (query) => {
 };
 
 export const startSearchPrices = (countryID) => {
+  // TEST
+  // return Promise.reject(
+  //   new Response(
+  //     JSON.stringify({
+  //       error: true,
+  //       message: "Сервер тимчасово недоступний",
+  //     }),
+  //     { status: 500 }
+  //   )
+  // );
   if (!countryID) {
     const error = {
       code: 400,
@@ -295,6 +305,8 @@ export const startSearchPrices = (countryID) => {
 };
 
 export const getSearchPrices = (token) => {
+
+
   const search = db.getSearch(token);
 
   if (!search) {
@@ -439,4 +451,3 @@ export const getPrice = (priceId) => {
 
   return Promise.resolve(response);
 };
-
