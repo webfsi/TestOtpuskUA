@@ -1,0 +1,80 @@
+@use "../../../styles/variables.scss" as *;
+
+.tour-card {
+  background: $color-background-card;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-base;
+  overflow: hidden;
+
+  &__image {
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__content {
+    padding: $spacing-16;
+  }
+
+  &__name {
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    margin: 0 0 $spacing-8 0;
+  }
+
+  &__location {
+    display: flex;
+    align-items: center;
+    gap: $spacing-8;
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+    margin-bottom: $spacing-8;
+  }
+
+  &__flag {
+    width: 20px;
+    height: 14px;
+    object-fit: cover;
+    border-radius: 2px;
+  }
+
+  &__date {
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+    margin-bottom: $spacing-12;
+
+    span {
+      color: $color-text-muted;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__price {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $color-primary;
+  }
+
+  &__link {
+    font-size: $font-size-sm;
+    color: $color-info;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+

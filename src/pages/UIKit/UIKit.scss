@@ -115,6 +115,16 @@
     }
   }
 
+  &__tour-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-24;
+
+    @include tablet {
+      grid-template-columns: 1fr;
+    }
+  }
+
   &__colors {
     display: flex;
     flex-wrap: wrap;

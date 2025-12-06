@@ -4,6 +4,7 @@ import { Button } from "../../components/ui/Button";
 import { Dropdown, DropdownItem } from "../../components/ui/Dropdown";
 import { Loader } from "../../components/ui/Loader";
 import { Message } from "../../components/ui/Message";
+import { TourCard } from "../../components/ui/TourCard";
 import { SearchResults } from "../../features/SearchResults";
 import "./UIKit.scss";
 import { mockCountries } from "../../mocks";
@@ -144,6 +145,34 @@ function UIKit() {
             <h4>Empty state:</h4>
             <SearchResults isEmpty emptyText="За вашим запитом турів не знайдено" />
           </div>
+        </div>
+      </section>
+
+      <section className="ui-kit__section">
+        <h2>TourCard</h2>
+        <div className="ui-kit__tour-cards">
+          <TourCard
+            hotelName="Sunrise Garden Beach Resort"
+            hotelImage="https://newimg.otpusk.com/2/400x300/00/03/97/88/3978846.webp"
+            cityName="Хургада"
+            countryName="Єгипет"
+            countryFlag="https://flagcdn.com/w40/eg.png"
+            startDate="15.01.2025"
+            price={12345}
+            currency="грн"
+            priceId="price-123"
+          />
+          <TourCard
+            hotelName="Rixos Premium Bodrum"
+            hotelImage="https://newimg.otpusk.com/2/400x300/00/00/74/48/744854.webp"
+            cityName="Бодрум"
+            countryName="Туреччина"
+            countryFlag="https://flagcdn.com/w40/tr.png"
+            startDate="20.02.2025"
+            price={45600}
+            currency="грн"
+            priceId="price-456"
+          />
         </div>
       </section>
 
