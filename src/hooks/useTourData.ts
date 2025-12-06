@@ -25,7 +25,7 @@ export const useTourData = (priceId: string | null, hotelId: string | null) => {
     try {
       const [priceRes, hotelRes] = await Promise.all([
         getPrice(priceId),
-        getHotel(hotelId),
+        getHotel(Number(hotelId)),
       ]);
 
       const priceData = await priceRes.json();
@@ -49,4 +49,3 @@ export const useTourData = (priceId: string | null, hotelId: string | null) => {
 
   return state;
 };
-
