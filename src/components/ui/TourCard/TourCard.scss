@@ -15,6 +15,7 @@
   &--detailed {
     max-width: 700px;
     padding: $spacing-24;
+    padding: f-clamp(20, 25, 320, 1440);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
@@ -100,6 +101,7 @@
 
   &__text {
     line-height: 1.6;
+    font-size: f-clamp(12, 16, 320, 1440);
     color: $color-text-secondary;
   }
 
@@ -160,8 +162,7 @@
   }
 
   &--detailed &__price {
-    font-size: $font-size-xl;
-    color: $color-primary;
+    font-size: f-clamp(22, 30, 320, 1440);
   }
 
   &__link {
