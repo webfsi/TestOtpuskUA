@@ -29,9 +29,8 @@
     cursor: pointer;
     transition: background-color $transition-fast;
 
-    &:hover,
-    &--active {
-      background-color: $color-gray-50;
+    &:hover {
+      background-color: $color-gray-100;
     }
 
     &--active {
