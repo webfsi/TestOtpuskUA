@@ -122,7 +122,6 @@ export const SearchForm: FC<SearchFormProps> = ({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (selectedItem) {
-      console.log("Search:", selectedItem);
       onSubmit?.(selectedItem);
     }
   };
