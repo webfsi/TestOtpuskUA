@@ -5,7 +5,14 @@ import { Dropdown, DropdownItem } from "../../components/ui/Dropdown";
 import { Loader } from "../../components/ui/Loader";
 import { Message } from "../../components/ui/Message";
 import { TourCard } from "../../components/ui/TourCard";
+import { IconText } from "../../components/ui/IconText";
 import { SearchResults } from "../../features/SearchResults";
+import {
+  WifiIcon,
+  PoolIcon,
+  ParkingIcon,
+  CalendarIcon,
+} from "../../components/icons";
 import "./UIKit.scss";
 import { mockCountries } from "../../mocks";
 
@@ -47,6 +54,15 @@ function UIKit() {
           <Message variant="success">Success message</Message>
           <Message variant="warning">Warning message</Message>
           <Message variant="error">Error message</Message>
+        </div>
+      </section>
+
+      <section className="ui-kit__section">
+        <h2>IconText</h2>
+        <div className="ui-kit__icon-texts">
+          <IconText icon={<CalendarIcon size={16} />} text="15.01.2025" />
+          <IconText icon={<WifiIcon size={16} />} text="Wi-Fi" />
+          <IconText icon={<PoolIcon size={16} />} text="Басейн" />
         </div>
       </section>
 
@@ -143,13 +159,16 @@ function UIKit() {
           </div>
           <div>
             <h4>Empty state:</h4>
-            <SearchResults isEmpty emptyText="За вашим запитом турів не знайдено" />
+            <SearchResults
+              isEmpty
+              emptyText="За вашим запитом турів не знайдено"
+            />
           </div>
         </div>
       </section>
 
       <section className="ui-kit__section">
-        <h2>TourCard</h2>
+        <h2>TourCard (default)</h2>
         <div className="ui-kit__tour-cards">
           <TourCard
             hotelName="Sunrise Garden Beach Resort"
@@ -161,6 +180,7 @@ function UIKit() {
             price={12345}
             currency="грн"
             priceId="price-123"
+            hotelId="hotel-1"
           />
           <TourCard
             hotelName="Rixos Premium Bodrum"
@@ -172,6 +192,31 @@ function UIKit() {
             price={45600}
             currency="грн"
             priceId="price-456"
+            hotelId="hotel-2"
+          />
+        </div>
+      </section>
+
+      <section className="ui-kit__section">
+        <h2>TourCard (detailed)</h2>
+        <div className="ui-kit__tour-card-detailed">
+          <TourCard
+            variant="detailed"
+            hotelName="Sunrise Garden Beach Resort"
+            hotelImage="https://newimg.otpusk.com/2/400x300/00/03/97/88/3978846.webp"
+            cityName="Хургада"
+            countryName="Єгипет"
+            countryFlag="https://flagcdn.com/w40/eg.png"
+            startDate="15.01.2025"
+            price={12345}
+            currency="грн"
+            description="Готель розташований на березі Червоного моря та пропонує комфортний відпочинок для всієї родини. До послуг гостей басейн, спа-центр та ресторан."
+            services={[
+              { icon: <WifiIcon size={16} />, label: "Wi-Fi" },
+              { icon: <PoolIcon size={16} />, label: "Басейн" },
+              { icon: <ParkingIcon size={16} />, label: "Парковка" },
+            ]}
+            showLink={false}
           />
         </div>
       </section>

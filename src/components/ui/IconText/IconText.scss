@@ -1,0 +1,24 @@
+@use "../../../styles/variables.scss" as *;
+@use "../../../styles/mixins.scss" as *;
+
+.icon-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: inherit;
+  }
+
+  &__text {
+    white-space: nowrap;
+    display: inline-block;
+    padding-top: 2px;
+  }
+}
+

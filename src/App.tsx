@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import UIKit from "./pages/UIKit/UIKit";
+import Tour from "./pages/Tour/Tour";
 import { SearchProvider } from "./context";
 
 function App() {
@@ -28,10 +29,11 @@ function App() {
             </li>
           </ul>
         </nav>
-        <main style={{ padding: "0" }}>
+        <main>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/ui-kit" element={<UIKit />} />
+            <Route path="/tour/:priceId/:hotelId" element={<Tour />} />
           </Routes>
         </main>
       </SearchProvider>

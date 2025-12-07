@@ -91,4 +91,3 @@ export const useSearch = (): SearchContextValue => {
   }
   return context;
 };
-
