@@ -1,75 +1,178 @@
-@use '../../styles/variables.scss' as *;
-@use '../../styles/mixins.scss' as *;
+@use "../../styles/variables.scss" as *;
+@use "../../styles/mixins.scss" as *;
 
 .ui-kit {
-	padding: $spacing-32;
-	max-width: 1200px;
-	margin: 0 auto;
+  padding: $spacing-32;
+  max-width: 1200px;
+  margin: 0 auto;
 
-	&__section {
-		margin-top: $spacing-40;
-		padding: $spacing-24;
-		background-color: $color-background-card;
-		border-radius: $border-radius-lg;
-		box-shadow: $shadow-base;
+  &__description {
+    color: $color-text-secondary;
+    margin-top: $spacing-8;
+  }
 
-		> h2 {
-			margin-bottom: $spacing-16;
-		}
+  &__section {
+    margin-top: $spacing-40;
+    padding: $spacing-24;
+    background-color: $color-background-card;
+    border-radius: $border-radius-lg;
+    box-shadow: $shadow-base;
 
-		h1, h3, h4 {
-			margin-top: $spacing-12;
-		}
+    > h2 {
+      margin-bottom: $spacing-16;
+    }
 
-		p {
-			margin-top: $spacing-8;
-		}
+    > h1,
+    > h2,
+    > h3,
+    > h4 {
+      margin-top: $spacing-12;
+    }
 
-		a {
-			display: inline-block;
-			margin-top: $spacing-8;
-			color: $color-primary;
+    > p {
+      margin-top: $spacing-8;
+    }
 
-			&:hover {
-				color: $color-primary-hover;
-			}
-		}
-	}
+    > a {
+      display: inline-block;
+      margin-top: $spacing-8;
+      color: $color-primary;
 
-	&__colors {
-		display: flex;
-		flex-wrap: wrap;
-		gap: $spacing-16;
-	}
+      &:hover {
+        color: $color-primary-hover;
+      }
+    }
+  }
 
-	&__color {
-		@include flex-center;
-		width: 120px;
-		height: 80px;
-		border-radius: $border-radius-base;
-		color: $color-text-inverse;
-		font-weight: $font-weight-medium;
-		font-size: $font-size-sm;
+  &__loaders {
+    display: flex;
+    align-items: center;
+    gap: $spacing-24;
+  }
 
-		&--primary {
-			background-color: $color-primary;
-		}
+  &__messages {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-12;
+  }
 
-		&--success {
-			background-color: $color-success;
-		}
+  &__icon-texts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-16;
+  }
 
-		&--warning {
-			background-color: $color-warning;
-			color: $color-text-primary;
-		}
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-16;
+  }
 
-		&--error {
-			background-color: $color-error;
-		}
+  &__button-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $spacing-12;
+  }
 
-		&--info {
-			background-color: $color-info;
-		}
-	}
+  &__input-button {
+    display: flex;
+    align-items: flex-end;
+    gap: $spacing-12;
+    margin-top: $spacing-16;
+
+    .input-wrapper {
+      flex: 1;
+      max-width: 300px;
+    }
+  }
+
+  &__dropdown-demo {
+    max-width: 400px;
+  }
+
+  &__selected {
+    margin-top: $spacing-16;
+    color: $color-text-secondary;
+  }
+
+  &__inputs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-24;
+
+    @include tablet {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__search-results {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-24;
+
+    > div {
+      border: 1px solid $color-border;
+      border-radius: $border-radius-base;
+      padding: $spacing-16;
+
+      h4 {
+        margin: 0 0 $spacing-8 0;
+      }
+    }
+  }
+
+  &__services {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-12;
+  }
+
+  &__tour-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: $spacing-16;
+    width: 100%;
+  }
+
+  &__tour-card-detailed {
+    max-width: 700px;
+  }
+
+  &__colors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-16;
+  }
+
+  &__color {
+    @include flex-center;
+    width: 120px;
+    height: 80px;
+    border-radius: $border-radius-base;
+    color: $color-text-inverse;
+    font-weight: $font-weight-medium;
+    font-size: $font-size-sm;
+
+    &--primary {
+      background-color: $color-primary;
+    }
+
+    &--success {
+      background-color: $color-success;
+    }
+
+    &--warning {
+      background-color: $color-warning;
+      color: $color-text-primary;
+    }
+
+    &--error {
+      background-color: $color-error;
+    }
+
+    &--info {
+      background-color: $color-info;
+    }
+  }
 }
