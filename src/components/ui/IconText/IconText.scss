@@ -13,12 +13,11 @@
     align-items: center;
     justify-content: center;
     color: inherit;
+    line-height: 0;
   }
 
   &__text {
     white-space: nowrap;
     display: inline-block;
-    padding-top: 2px;
   }
 }
-
