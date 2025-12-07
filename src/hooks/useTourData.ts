@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
-import { getPrice, getHotel } from "../api";
-import { Price, HotelDetail } from "../types";
+import { getPrice, getHotel, getCountries } from "../api";
+import { Price, HotelDetail, CountriesMap } from "../types";
 
 interface TourDataState {
   isLoading: boolean;
@@ -23,19 +23,22 @@ export const useTourData = (priceId: string | null, hotelId: string | null) => {
     setState({ isLoading: true, error: null, price: null, hotel: null });
 
     try {
-      const [priceRes, hotelRes] = await Promise.all([
+      const [priceRes, hotelRes, countriesRes] = await Promise.all([
         getPrice(priceId),
         getHotel(Number(hotelId)),
+        getCountries(),
       ]);
 
       const priceData = await priceRes.json();
       const hotelData = await hotelRes.json();
+      const countriesData: CountriesMap = await countriesRes.json();
+      const countryFlag = countriesData[hotelData.countryId]?.flag;
 
       setState({
         isLoading: false,
         error: null,
         price: priceData,
-        hotel: hotelData,
+        hotel: { ...hotelData, countryFlag },
       });
     } catch (err) {
       const msg = err instanceof Error ? err.message : "err";

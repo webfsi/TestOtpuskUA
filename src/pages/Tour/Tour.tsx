@@ -84,6 +84,7 @@ function Tour() {
         hotelImage={hotel.img}
         cityName={hotel.cityName}
         countryName={hotel.countryName}
+        countryFlag={hotel.countryFlag}
         startDate={formatDate(price.startDate)}
         price={price.amount}
         currency={price.currency}

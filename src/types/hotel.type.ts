@@ -13,4 +13,5 @@ export type HotelServices = Record<string, string>;
 export interface HotelDetail extends Hotel {
   description: string;
   services: HotelServices;
+  countryFlag?: string;
 }
