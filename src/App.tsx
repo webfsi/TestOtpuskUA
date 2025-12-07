@@ -7,6 +7,7 @@ import { SearchProvider } from "./context";
 function App() {
   return (
     <BrowserRouter
+      basename="/testOtpusk"
       future={{
         v7_startTransition: true,
         v7_relativeSplatPath: true,
