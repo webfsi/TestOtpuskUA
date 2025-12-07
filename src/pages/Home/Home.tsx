@@ -18,26 +18,28 @@ function Home() {
   } = useSearch();
 
   const tourCards = hasData
-    ? Object.values(prices!).map((price) => {
-        const hotel = hotels![price.hotelID];
-        if (!hotel) return null;
+    ? Object.values(prices!)
+        .sort((a, b) => a.amount - b.amount)
+        .map((price) => {
+          const hotel = hotels![price.hotelID];
+          if (!hotel) return null;
 
-        return (
-          <TourCard
-            key={price.id}
-            hotelName={hotel.name}
-            hotelImage={hotel.img}
-            cityName={hotel.cityName}
-            countryName={hotel.countryName}
-            countryFlag={selectedCountry?.imageUrl}
-            startDate={formatDate(price.startDate)}
-            price={price.amount}
-            currency={price.currency === "usd" ? "$" : "грн"}
-            priceId={price.id}
-            hotelId={price.hotelID}
-          />
-        );
-      })
+          return (
+            <TourCard
+              key={price.id}
+              hotelName={hotel.name}
+              hotelImage={hotel.img}
+              cityName={hotel.cityName}
+              countryName={hotel.countryName}
+              countryFlag={selectedCountry?.imageUrl}
+              startDate={formatDate(price.startDate)}
+              price={price.amount}
+              currency={price.currency === "usd" ? "$" : "грн"}
+              priceId={price.id}
+              hotelId={price.hotelID}
+            />
+          );
+        })
     : null;
 
   return (
