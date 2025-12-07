@@ -1,4 +1,5 @@
 import { FC, ReactNode } from "react";
+import { Link } from "react-router-dom";
 import { IconText } from "../IconText/IconText";
 import { Button } from "../Button";
 import { CountryIcon, CityIcon } from "../../icons";
@@ -180,12 +181,12 @@ export const TourCard: FC<TourCardProps> = ({
             showLink &&
             priceId &&
             hotelId && (
-              <a
-                href={`/tour/${priceId}/${hotelId}`}
+              <Link
+                to={`/tour/${priceId}/${hotelId}`}
                 className="tour-card__link"
               >
                 {mergedLabels.linkLabel}
-              </a>
+              </Link>
             )
           )}
         </div>
