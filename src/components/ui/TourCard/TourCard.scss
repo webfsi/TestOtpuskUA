@@ -14,7 +14,6 @@
 
   &--detailed {
     max-width: 700px;
-    padding: $spacing-24;
     padding: f-clamp(20, 25, 320, 1440);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
