@@ -18,7 +18,6 @@ interface SearchContextValue {
   hotels: Record<string, Hotel> | null;
   selectedCountry: DropdownItem | null;
   search: (item: DropdownItem) => void;
-  abort: () => void;
   isEmpty: boolean;
   hasData: boolean;
 }
@@ -35,18 +34,11 @@ export const SearchProvider: FC<SearchProviderProps> = ({ children }) => {
     error,
     data: prices,
     search: searchPrices,
-    abort,
   } = useSearchPrices();
   const { data: hotels, fetch: fetchHotels } = useHotels();
   const [selectedCountry, setSelectedCountry] = useState<DropdownItem | null>(
     null
   );
-
-  useEffect(() => {
-    return () => {
-      abort();
-    };
-  }, [abort]);
 
   useEffect(() => {
     if (prices && selectedCountry) {
@@ -74,7 +66,6 @@ export const SearchProvider: FC<SearchProviderProps> = ({ children }) => {
     hotels,
     selectedCountry,
     search,
-    abort,
     isEmpty,
     hasData,
   };
