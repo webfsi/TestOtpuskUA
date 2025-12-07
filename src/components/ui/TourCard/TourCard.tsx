@@ -24,7 +24,7 @@ const defaultLabels: TourCardLabels = {
   servicesLabel: "Послуги",
   startDateLabel: "Старт туру:",
   linkLabel: "Відкрити ціну",
-  buttonLabel: "Забронювати",
+  buttonLabel: "Відкрити ціну",
 };
 
 const formatCurrency = (currency: string): string => {
@@ -174,7 +174,7 @@ export const TourCard: FC<TourCardProps> = ({
             {price.toLocaleString("uk-UA")} {currencySymbol}
           </span>
           {isDetailed ? (
-            <Button size="sm" disabled>
+            <Button variant="secondary" size="sm" disabled>
               {mergedLabels.buttonLabel}
             </Button>
           ) : (
