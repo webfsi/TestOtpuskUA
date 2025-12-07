@@ -1,3 +1,4 @@
+@use "sass:math";
 @use "./variables.scss" as *;
 
 @mixin media($min: null, $max: null, $orient: null) {
@@ -124,7 +125,7 @@
 $rem-base: 16px;
 
 @function strip-unit($num) {
-  @return $num / ($num * 0 + 1);
+  @return math.div($num, $num * 0 + 1);
 }
 
 @function f-clamp($min-size, $max-size, $min-width, $max-width) {
@@ -134,8 +135,8 @@ $rem-base: 16px;
   $max-w-srp: strip-unit($max-width);
   $size-difference: $max-s-srp - $min-s-srp;
   $width-difference: $max-w-srp - $min-w-srp;
-  $vw-coefficient: ($size-difference / $width-difference) * 100;
-  $initial-offset: $min-s-srp - (($min-w-srp / 100) * $vw-coefficient);
+  $vw-coefficient: math.div($size-difference, $width-difference) * 100;
+  $initial-offset: $min-s-srp - (math.div($min-w-srp, 100) * $vw-coefficient);
 
   @return clamp(
     #{$min-s-srp}px,
