@@ -7,4 +7,5 @@ export { PoolIcon } from "./PoolIcon";
 export { TennisIcon } from "./TennisIcon";
 export { LaundryIcon } from "./LaundryIcon";
 export { ParkingIcon } from "./ParkingIcon";
+export { CalendarIcon } from "./CalendarIcon";
 

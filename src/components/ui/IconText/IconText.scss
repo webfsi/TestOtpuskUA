@@ -1,12 +1,10 @@
 @use "../../../styles/variables.scss" as *;
+@use "../../../styles/mixins.scss" as *;
 
-.service-badge {
+.icon-text {
   display: inline-flex;
   align-items: center;
-  gap: $spacing-8;
-  padding: $spacing-8 $spacing-12;
-  background: $color-background-secondary;
-  border-radius: $border-radius-base;
+  gap: 6px;
   font-size: $font-size-sm;
   color: $color-text-primary;
 
@@ -14,11 +12,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: $color-info;
+    color: inherit;
   }
 
-  &__label {
+  &__text {
     white-space: nowrap;
+    display: inline-block;
+    padding-top: 2px;
   }
 }
 

@@ -29,7 +29,7 @@ function App() {
             </li>
           </ul>
         </nav>
-        <main style={{ padding: "0" }}>
+        <main>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/ui-kit" element={<UIKit />} />
