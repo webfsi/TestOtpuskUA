@@ -1,29 +1,14 @@
-# Default Empty Project
+# TestOtpuskUA - Тестове завдання
 
-Чистий шаблон проекту з React + Vite + TypeScript.
+Тестовий проект для пошуку турів. Реалізовано форму пошуку з автодоповненням, відображення результатів пошуку та детальну сторінку туру.
 
-## Структура проекту
+## Технології
 
-```
-src/
-  ├── main.tsx                    # Точка входу
-  ├── App.tsx                     # Головний компонент з роутингом
-  ├── index.css                   # Глобальні стилі + normalize
-  ├── vite-env.d.ts              # Типи для Vite
-  ├── pages/                      # Сторінки
-  │   ├── Home/
-  │   │   └── Home.tsx
-  │   └── About/
-  │       └── About.tsx
-  ├── components/                 # Компоненти
-  │   └── ExampleComponent/
-  │       └── ExampleComponent.tsx
-  ├── assets/                     # Статичні файли
-  │   ├── images/                 # Картинки
-  │   └── icons/                  # Іконки
-  └── styles/                     # Стилі
-      └── variables.css           # CSS змінні для кольорів
-```
+- React 18
+- TypeScript
+- Vite
+- React Router
+- SCSS/Sass (BEM методологія)
 
 ## Встановлення
 
@@ -43,44 +28,159 @@ npm run dev
 npm run build
 ```
 
-## Перегляд білду
-
-```bash
-npm run preview
-```
-
 ## Лінт
 
 ```bash
 npm run lint
 ```
 
+## Структура проекту
+
+```
+src/
+├── api/                    # API модуль
+│   ├── api.js             # Оригінальний mock API (не редагується)
+│   ├── mainApi.js         # Копія для експериментів
+│   └── index.ts           # Експорти API функцій
+│
+├── components/
+│   ├── icons/             # SVG іконки як React компоненти
+│   │   ├── CalendarIcon.tsx
+│   │   ├── CityIcon.tsx
+│   │   ├── CountryIcon.tsx
+│   │   └── ...
+│   │
+│   └── ui/                # UI компоненти
+│       ├── Button/        # Кнопка (підтримує Link)
+│       ├── Dropdown/      # Випадаючий список з пошуком
+│       ├── IconText/      # Іконка + текст
+│       ├── Input/         # Поле вводу
+│       ├── Loader/        # Індикатор завантаження
+│       ├── Message/       # Повідомлення (error/warning/info/success)
+│       └── TourCard/      # Картка туру (default/detailed варіанти)
+│
+├── context/               # React Context
+│   └── SearchContext.tsx  # Контекст пошуку (prices, hotels, стан)
+│
+├── features/              # Фічі (складні компоненти з логікою)
+│   ├── SearchForm/        # Форма пошуку з автодоповненням
+│   └── SearchResults/     # Результати пошуку (грід карток)
+│
+├── hooks/                 # Кастомні хуки
+│   ├── useSearchPrices.ts # Пошук цін (retry, кешування, скасування)
+│   ├── useHotels.ts       # Завантаження готелів
+│   └── useTourData.ts     # Дані для сторінки туру
+│
+├── mocks/                 # Моки для UI Kit та констант
+│   ├── countries.mock.ts  # Моки країн для Dropdown
+│   └── services.mock.ts   # Іконки та назви послуг готелів
+│
+├── pages/                 # Сторінки
+│   ├── Home/              # Головна (пошук + результати)
+│   ├── Tour/              # Детальна сторінка туру
+│   └── UIKit/             # UI Kit для демонстрації компонентів
+│
+├── styles/                # Глобальні стилі
+│   ├── global.scss        # Глобальні стилі
+│   ├── variables.scss     # SCSS змінні (кольори, відступи, шрифти)
+│   └── mixins.scss        # SCSS міксіни
+│
+├── types/                 # TypeScript типи
+│   ├── country.type.ts
+│   ├── hotel.type.ts
+│   ├── price.type.ts
+│   └── ...
+│
+├── utils/                 # Утиліти
+│   ├── formatDate.ts      # Форматування дати
+│   ├── formatPrice.ts     # Форматування ціни
+│   └── formatCurrency.ts  # Форматування валюти
+│
+├── App.tsx                # Головний компонент з роутингом
+└── main.tsx               # Точка входу
+```
+
+## Прийняті рішення
+
+### Стилізація
+
+- **SCSS/Sass** - як вказано у вакансії
+- **BEM методологія** - без CSS модулів, класичний підхід
+- **CamelCase** - для назв файлів і папок компонентів
+- **Без UI бібліотек** - всі компоненти написані з нуля (без MUI, Bootstrap тощо)
+
+### Архітектура
+
+- **Розділення логіки від UI** - бізнес-логіка в хуках, UI в компонентах
+- **React Context** - для глобального стану пошуку
+- **Типізація** - повна типізація через TypeScript
+- **Декомпозиція** - дрібні перевикористовувані компоненти
+
+### API
+
+Файл `src/api/api.js` - mock API, який **не редагується** згідно ТЗ.
+
+**Особливість:** `getPrice(priceId)` генерує нову випадкову ціну при кожному виклику. Тому ціна на детальній сторінці туру може відрізнятись від ціни в списку - це очікувана поведінка mock API.
+
+Файл `src/api/mainApi.js` - копія оригінального API, створена для експериментів. Залишена в проекті, але не використовується.
+
+### Пошук з retry та скасуванням
+
+- **Retry механізм** - при помилці 425 (Too Early) очікування до `waitUntil`
+- **Кешування** - результати пошуку кешуються по countryId
+- **Скасування** - при новому пошуку попередній скасовується через `stopSearchPrices`
+
+## Компоненти
+
+### Button
+
+Універсальна кнопка з підтримкою `<Link>` для навігації.
+
+```tsx
+<Button variant="primary" size="md">Текст</Button>
+<Button to="/page" variant="secondary">Посилання</Button>
+```
+
+### Dropdown
+
+Випадаючий список з пошуком, підтримкою іконок та зображень.
+
+```tsx
+<Dropdown
+  value={value}
+  onChange={setValue}
+  onSelect={handleSelect}
+  items={items}
+  placeholder="Пошук..."
+/>
+```
+
+### TourCard
+
+Картка туру з двома варіантами відображення.
+
+```tsx
+<TourCard variant="default" {...props} />
+<TourCard variant="detailed" {...props} />
+```
+
+### SearchForm
+
+Форма пошуку з автодоповненням через API.
+
+### SearchResults
+
+Грід результатів пошуку з картками турів.
+
+## Сторінки
+
+- `/` - Головна сторінка з пошуком
+- `/tour/:priceId/:hotelId` - Детальна сторінка туру
+- `/ui-kit` - UI Kit для демонстрації компонентів
+
 ## Особливості
 
-- ✅ React 18
-- ✅ Vite
-- ✅ TypeScript
-- ✅ React Router
-- ✅ Normalize CSS
-- ✅ CSS змінні для кольорів
-- ✅ ESLint
-- ✅ Prettier
-
-## Створення нового компонента
-
-Використовуйте `ExampleComponent` як шаблон для створення нових компонентів.
-
-## Створення нової сторінки
-
-1. Створіть папку в `src/pages/`
-2. Створіть компонент сторінки
-3. Додайте роут в `src/App.tsx`
-
-## Кольори
-
-Кольори визначені в `src/styles/variables.css` як CSS змінні. Використовуйте їх через `var(--color-primary)`.
-
-## Статичні файли
-
-- Картинки: `src/assets/images/`
-- Іконки: `src/assets/icons/`
+- Навігація через `react-router-dom` без перезавантаження сторінки
+- Збереження результатів пошуку при переході на сторінку туру
+- Клавіатурна навігація в Dropdown (стрілки, Enter, Escape)
+- Адаптивна верстка

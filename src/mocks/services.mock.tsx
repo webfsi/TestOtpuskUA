@@ -21,4 +21,3 @@ export const serviceLabels: Record<string, string> = {
   laundry: "Пральня",
   parking: "Парковка",
 };
-

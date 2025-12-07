@@ -10,4 +10,3 @@ const currencyMap: Record<string, string> = {
 export const formatCurrency = (currency: string): string => {
   return currencyMap[currency] || currency;
 };
-

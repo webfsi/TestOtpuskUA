@@ -31,4 +31,3 @@ export interface TourCardProps {
   showLink?: boolean;
   labels?: TourCardLabels;
 }
-
