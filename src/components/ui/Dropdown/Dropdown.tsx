@@ -69,8 +69,6 @@ export const Dropdown: FC<DropdownProps> = ({
   }, [highlightedIndex, isOpen]);
 
   const handleSelect = (item: DropdownItem) => {
-    console.log("ACTION: Item Selected ->", item.label);
-
     onSelect(item);
     onChange(item.label);
     setIsOpen(false);
@@ -78,24 +76,18 @@ export const Dropdown: FC<DropdownProps> = ({
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("EVENT: Input Change ->", e.target.value);
-
     onChange(e.target.value);
     if (!isOpen) {
       setIsOpen(true);
-      console.log("setIsOpen(true)");
     }
     setHighlightedIndex(-1);
   };
 
   const handleFocus = () => {
     setIsOpen(true);
-    console.log("setIsOpen(true)");
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    console.log("EVENT: Key Down ->", e.key);
-
     if (!isOpen) {
       if (e.key === "ArrowDown" || e.key === "ArrowUp") {
         setIsOpen(true);
@@ -109,7 +101,6 @@ export const Dropdown: FC<DropdownProps> = ({
         e.preventDefault();
         setHighlightedIndex((prev) => {
           const newIndex = prev < items.length - 1 ? prev + 1 : prev;
-          console.log("ACTION: ArrowDown, new highlightedIndex is", newIndex);
           return newIndex;
         });
         break;
@@ -118,7 +109,6 @@ export const Dropdown: FC<DropdownProps> = ({
         e.preventDefault();
         setHighlightedIndex((prev) => {
           const newIndex = prev > 0 ? prev - 1 : prev;
-          console.log("ACTION: ArrowUp, new highlightedIndex is", newIndex);
           return newIndex;
         });
         break;
@@ -126,10 +116,6 @@ export const Dropdown: FC<DropdownProps> = ({
       case "Enter":
         if (highlightedIndex >= 0 && items[highlightedIndex]) {
           e.preventDefault();
-          console.log(
-            "ACTION: Enter pressed on item:",
-            items[highlightedIndex].label
-          );
           handleSelect(items[highlightedIndex]);
         }
         break;
