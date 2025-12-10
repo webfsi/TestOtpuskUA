@@ -28,9 +28,12 @@ export const SearchForm: FC<SearchFormProps> = ({
   onSubmit,
   getIconByType = defaultGetIconByType,
   className = "",
+  initialSelected = null,
 }) => {
   const [inputValue, setInputValue] = useState("");
-  const [selectedItem, setSelectedItem] = useState<DropdownItem | null>(null);
+  const [selectedItem, setSelectedItem] = useState<DropdownItem | null>(
+    initialSelected
+  );
   const [items, setItems] = useState<DropdownItem[]>([]);
   const [countries, setCountries] = useState<DropdownItem[]>([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -51,6 +54,16 @@ export const SearchForm: FC<SearchFormProps> = ({
   useEffect(() => {
     loadCountries();
   }, [loadCountries]);
+
+  useEffect(() => {
+    if (initialSelected) {
+      setSelectedItem(initialSelected);
+      setInputValue(initialSelected.label);
+      if (initialSelected.type === "country") {
+        setItems(countries);
+      }
+    }
+  }, [initialSelected, countries]);
 
   useEffect(() => {
     if (selectedItem && inputValue !== selectedItem.label) {
@@ -86,7 +99,11 @@ export const SearchForm: FC<SearchFormProps> = ({
   const handleInputChange = (value: string) => {
     setInputValue(value);
     if (value.trim()) {
-      handleSearch(value);
+      if (selectedItem?.type === "country") {
+        setItems(countries);
+      } else {
+        handleSearch(value);
+      }
     } else {
       setItems(countries);
     }

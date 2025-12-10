@@ -1,12 +1,23 @@
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { IconText } from "../IconText/IconText";
 import { Button } from "../Button";
 import { CountryIcon, CityIcon } from "../../icons";
 import { CalendarIcon } from "../../icons/CalendarIcon";
-import { formatCurrency } from "../../../utils";
-import type { TourCardProps, TourCardLabels } from "./TourCard.types";
 import "./TourCard.scss";
+
+interface ServiceItem {
+  icon: ReactNode;
+  label: string;
+}
+
+interface TourCardLabels {
+  descriptionLabel?: string;
+  servicesLabel?: string;
+  startDateLabel?: string;
+  linkLabel?: string;
+  buttonLabel?: string;
+}
 
 const defaultLabels: TourCardLabels = {
   descriptionLabel: "Опис",
@@ -15,6 +26,37 @@ const defaultLabels: TourCardLabels = {
   linkLabel: "Відкрити ціну",
   buttonLabel: "Відкрити ціну",
 };
+
+const formatCurrency = (currency: string): string => {
+  const currencyMap: Record<string, string> = {
+    USD: "$",
+    usd: "$",
+    UAH: "грн",
+    uah: "грн",
+    EUR: "€",
+    eur: "€",
+  };
+  return currencyMap[currency] || currency;
+};
+
+interface TourCardProps {
+  hotelName: string;
+  hotelImage: string;
+  cityName: string;
+  countryName: string;
+  countryFlag?: string;
+  startDate: string;
+  price: number;
+  currency: string;
+  priceId?: string;
+  hotelId?: string;
+  className?: string;
+  variant?: "default" | "detailed";
+  description?: string;
+  services?: ServiceItem[];
+  showLink?: boolean;
+  labels?: TourCardLabels;
+}
 
 export const TourCard: FC<TourCardProps> = ({
   hotelName,

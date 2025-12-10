@@ -11,4 +11,5 @@ export interface SearchFormProps {
   onSubmit?: (item: DropdownItem) => void;
   getIconByType?: (type?: string) => ReactNode;
   className?: string;
+  initialSelected?: DropdownItem | null;
 }

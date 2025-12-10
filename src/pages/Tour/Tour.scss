@@ -1,0 +1,24 @@
+@use "../../styles/variables.scss" as *;
+
+.tour-page {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: $spacing-24;
+
+  &__loader {
+    display: flex;
+    justify-content: center;
+    padding: $spacing-48 0;
+  }
+
+  &__back {
+    display: inline-block;
+    margin-bottom: $spacing-16;
+    color: $color-primary;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
