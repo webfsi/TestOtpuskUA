@@ -2,6 +2,9 @@ import { useState } from "react";
 import { Input } from "../../components/ui/Input";
 import { Button } from "../../components/ui/Button";
 import { Dropdown, DropdownItem } from "../../components/ui/Dropdown";
+import { Loader } from "../../components/ui/Loader";
+import { Message } from "../../components/ui/Message";
+import { SearchResults } from "../../features/SearchResults";
 import "./UIKit.scss";
 import { mockCountries } from "../../mocks";
 
@@ -26,6 +29,25 @@ function UIKit() {
       <p className="ui-kit__description">
         Сторінка для перегляду UI компонентів
       </p>
+
+      <section className="ui-kit__section">
+        <h2>Loader</h2>
+        <div className="ui-kit__loaders">
+          <Loader size="sm" />
+          <Loader size="md" />
+          <Loader size="lg" />
+        </div>
+      </section>
+
+      <section className="ui-kit__section">
+        <h2>Message</h2>
+        <div className="ui-kit__messages">
+          <Message variant="info">Info message</Message>
+          <Message variant="success">Success message</Message>
+          <Message variant="warning">Warning message</Message>
+          <Message variant="error">Error message</Message>
+        </div>
+      </section>
 
       <section className="ui-kit__section">
         <h2>Button</h2>
@@ -56,7 +78,7 @@ function UIKit() {
       </section>
 
       <section className="ui-kit__section">
-        <h2>Input + Button (однакова висота)</h2>
+        <h2>Input + Button</h2>
         <div className="ui-kit__input-button">
           <Input placeholder="Small input" size="sm" />
           <Button size="sm">SM</Button>
@@ -104,6 +126,24 @@ function UIKit() {
           <Input label="Small" placeholder="Small input" size="sm" />
           <Input label="Large" placeholder="Large input" size="lg" />
           <Input label="Disabled" placeholder="Disabled input" disabled />
+        </div>
+      </section>
+
+      <section className="ui-kit__section">
+        <h2>SearchResults</h2>
+        <div className="ui-kit__search-results">
+          <div>
+            <h4>Loading state:</h4>
+            <SearchResults isLoading />
+          </div>
+          <div>
+            <h4>Error state:</h4>
+            <SearchResults error="Помилка завантаження. Спробуйте пізніше." />
+          </div>
+          <div>
+            <h4>Empty state:</h4>
+            <SearchResults isEmpty emptyText="За вашим запитом турів не знайдено" />
+          </div>
         </div>
       </section>
 

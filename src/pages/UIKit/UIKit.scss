@@ -43,6 +43,18 @@
     }
   }
 
+  &__loaders {
+    display: flex;
+    align-items: center;
+    gap: $spacing-24;
+  }
+
+  &__messages {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-12;
+  }
+
   &__buttons {
     display: flex;
     flex-direction: column;
@@ -84,6 +96,22 @@
 
     @include tablet {
       grid-template-columns: 1fr;
+    }
+  }
+
+  &__search-results {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-24;
+
+    > div {
+      border: 1px solid $color-border;
+      border-radius: $border-radius-base;
+      padding: $spacing-16;
+
+      h4 {
+        margin: 0 0 $spacing-8 0;
+      }
     }
   }
 
