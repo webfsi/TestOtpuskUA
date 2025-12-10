@@ -1,0 +1,177 @@
+@use "../../../styles/variables.scss" as *;
+@use "../../../styles/mixins.scss" as *;
+
+.tour-card {
+  background: $color-background-card;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-base;
+  overflow: hidden;
+  padding: 15px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+
+  &--detailed {
+    max-width: 700px;
+    padding: $spacing-24;
+    padding: f-clamp(20, 25, 320, 1440);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  &__image {
+    width: 100%;
+    max-height: 260px;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    border-radius: 8px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &--detailed &__image {
+    max-height: 300px;
+    margin-bottom: $spacing-16;
+  }
+
+  &__content {
+    padding: $spacing-16 0 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &--detailed &__content {
+    padding: 0;
+  }
+
+  &__name {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    margin: 0 0 $spacing-8 0;
+    font-weight: 700;
+  }
+
+  &--detailed > &__name {
+    font-size: $font-size-xl;
+    margin-bottom: $spacing-8;
+  }
+
+  &__location {
+    display: flex;
+    align-items: center;
+    gap: $spacing-8;
+    font-weight: 600;
+    font-size: $font-size-sm;
+    color: $color-text-primary;
+    margin-bottom: $spacing-8;
+
+    &--detailed {
+      gap: $spacing-12;
+      margin-bottom: $spacing-16;
+      color: $color-text-secondary;
+    }
+  }
+
+  &__divider {
+    color: $color-border;
+  }
+
+  &__flag {
+    width: 20px;
+    height: 14px;
+    object-fit: cover;
+    border-radius: 2px;
+  }
+
+  &__subtitle {
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    margin-bottom: $spacing-8;
+  }
+
+  &__description {
+    margin-bottom: $spacing-16;
+  }
+
+  &__text {
+    line-height: 1.6;
+    font-size: f-clamp(12, 16, 320, 1440);
+    color: $color-text-secondary;
+  }
+
+  &__services {
+    margin-bottom: $spacing-16;
+  }
+
+  &__services-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  &__service {
+    color: $color-text-primary;
+  }
+
+  &__date {
+    font-size: $font-size-sm;
+    color: $color-text-primary;
+    margin-bottom: $spacing-4;
+    font-weight: 700;
+
+    &:not(.tour-card__date--detailed) {
+      span {
+        font-weight: 300;
+        @include mobile {
+          display: block;
+        }
+      }
+    }
+
+    &--detailed {
+      margin-bottom: $spacing-12;
+      font-weight: normal;
+      padding-top: $spacing-16;
+      border-top: 1px solid $color-border;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    gap: 4px;
+    flex-direction: column;
+    margin-top: auto;
+
+    &--detailed {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  &__price {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $color-text-primary;
+  }
+
+  &--detailed &__price {
+    font-size: f-clamp(22, 30, 320, 1440);
+  }
+
+  &__link {
+    font-size: $font-size-sm;
+    color: $color-info;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

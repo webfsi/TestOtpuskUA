@@ -1,44 +1,62 @@
 import { useEffect } from "react";
 import { SearchForm } from "../../features/SearchForm";
 import { SearchResults } from "../../features/SearchResults";
-import { useSearchPrices } from "../../hooks";
-import { DropdownItem } from "../../components/ui/Dropdown";
+import { TourCard } from "../../components/ui/TourCard";
+import { formatDate } from "../../utils";
+import { useSearch } from "../../context";
 import "./Home.scss";
 
 function Home() {
-  const { isLoading, error, data, search, abort } = useSearchPrices();
+  const {
+    isLoading,
+    error,
+    prices,
+    hotels,
+    selectedCountry,
+    search,
+    isEmpty,
+    hasData,
+  } = useSearch();
 
-  useEffect(() => {
-    return () => {
-      abort();
-    };
-  }, [abort]);
+  const tourCards = hasData
+    ? Object.values(prices!)
+        .sort((a, b) => a.amount - b.amount)
+        .map((price) => {
+          const hotel = hotels![price.hotelID];
+          if (!hotel) return null;
 
-  const handleSearch = (item: DropdownItem) => {
-    if (item.type === "country") {
-      search(item.id);
-    }
-  };
-
-  const isEmpty = data && Object.keys(data).length === 0;
-  const hasData = data && Object.keys(data).length > 0;
+          return (
+            <TourCard
+              key={price.id}
+              hotelName={hotel.name}
+              hotelImage={hotel.img}
+              cityName={hotel.cityName}
+              countryName={hotel.countryName}
+              countryFlag={selectedCountry?.imageUrl}
+              startDate={formatDate(price.startDate)}
+              price={price.amount}
+              currency={price.currency === "usd" ? "$" : "грн"}
+              priceId={price.id}
+              hotelId={price.hotelID}
+            />
+          );
+        })
+    : null;
 
   return (
-    <div className="home">
-      <SearchForm title="Форма пошуку турів" onSubmit={handleSearch} />
-
+    <div className="container container--gap">
+      <SearchForm
+        title="Форма пошуку турів"
+        initialSelected={selectedCountry}
+        onSubmit={search}
+      />
       <SearchResults
         isLoading={isLoading}
         error={error}
         isEmpty={isEmpty}
         emptyText="За вашим запитом турів не знайдено"
       >
-        {hasData && (
-          <div className="home__results">
-            <p>Знайдено {Object.keys(data).length} пропозицій</p>
-            <pre>{JSON.stringify(data, null, 2)}</pre>
-          </div>
-        )}
+        {tourCards && <div className="cards">{tourCards}</div>}
       </SearchResults>
     </div>
   );
