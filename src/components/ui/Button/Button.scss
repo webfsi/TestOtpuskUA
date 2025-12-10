@@ -38,7 +38,7 @@
 
   &--secondary {
     color: $color-text-primary;
-    background-color: $color-background-card;
+    background-color: $color-border;
     border: 1px solid $color-border;
 
     &:hover:not(:disabled) {

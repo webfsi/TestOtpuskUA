@@ -1,3 +1,3 @@
-export * from "./useSearchPrices";
-export * from "./useHotels";
-export * from "./useTourData";
+export { useSearchPrices } from "./useSearchPrices";
+export { useHotels } from "./useHotels";
+export { useTourData } from "./useTourData";

@@ -1,5 +1,5 @@
 import { useState, useCallback, useRef } from "react";
-import { startSearchPrices, getSearchPrices } from "../api";
+import { startSearchPrices, getSearchPrices, stopSearchPrices } from "../api";
 import { Price } from "../types";
 
 interface SearchState {
@@ -19,7 +19,6 @@ export const useSearchPrices = () => {
   });
 
   const tokenRef = useRef<string | null>(null);
-  const abortedRef = useRef(false);
 
   const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
@@ -27,14 +26,14 @@ export const useSearchPrices = () => {
     token: string,
     retry = 0
   ): Promise<Record<string, Price>> => {
-    if (abortedRef.current) throw new Error("aborted");
+    if (token !== tokenRef.current) throw new Error("aborted");
 
     try {
       const res = await getSearchPrices(token);
-      const json = await res.json();
+      const json = await (res as Response).json();
       return json.prices;
     } catch (err) {
-      if (abortedRef.current) throw new Error("aborted");
+      if (token !== tokenRef.current) throw new Error("aborted");
 
       const response = err as Response;
       const json = await response.json();
@@ -46,7 +45,6 @@ export const useSearchPrices = () => {
       }
 
       if (retry < MAX_RETRIES) {
-        console.log("retry", retry + 1);
         await wait(500);
         return fetchPrices(token, retry + 1);
       }
@@ -56,17 +54,23 @@ export const useSearchPrices = () => {
   };
 
   const search = useCallback(async (countryId: string) => {
+    if (tokenRef.current) {
+      try {
+        await stopSearchPrices(tokenRef.current);
+      } catch {}
+      tokenRef.current = null;
+    }
+
     if (cache[countryId]) {
       setState({ isLoading: false, error: null, data: cache[countryId] });
       return;
     }
 
-    abortedRef.current = false;
     setState({ isLoading: true, error: null, data: null });
 
     try {
       const res = await startSearchPrices(countryId);
-      const json = await res.json();
+      const json = await (res as Response).json();
       tokenRef.current = json.token;
 
       const waitMs = new Date(json.waitUntil).getTime() - Date.now();
@@ -74,27 +78,20 @@ export const useSearchPrices = () => {
 
       const prices = await fetchPrices(json.token);
 
-      if (!abortedRef.current) {
-        cache[countryId] = prices;
-        setState({ isLoading: false, error: null, data: prices });
-      }
+      if (json.token !== tokenRef.current) return;
+
+      cache[countryId] = prices;
+      setState({ isLoading: false, error: null, data: prices });
     } catch (err) {
-      if (abortedRef.current) return;
+      if (err instanceof Error && err.message === "aborted") return;
 
       const msg = err instanceof Error ? err.message : "err";
       setState({ isLoading: false, error: msg, data: null });
     }
   }, []);
 
-  const abort = useCallback(() => {
-    abortedRef.current = true;
-    tokenRef.current = null;
-    setState((s) => ({ ...s, isLoading: false }));
-  }, []);
-
   return {
     ...state,
     search,
-    abort,
   };
 };

@@ -5,30 +5,8 @@ import { Loader } from "../../components/ui/Loader";
 import { Message } from "../../components/ui/Message";
 import { TourCard } from "../../components/ui/TourCard";
 import { Button } from "../../components/ui/Button";
-import {
-  WifiIcon,
-  PoolIcon,
-  TennisIcon,
-  LaundryIcon,
-  ParkingIcon,
-} from "../../components/icons";
+import { serviceIcons, serviceLabels } from "../../mocks";
 import "./Tour.scss";
-
-const serviceIcons: Record<string, React.ReactNode> = {
-  wifi: <WifiIcon size={16} />,
-  aquapark: <PoolIcon size={16} />,
-  tennis_court: <TennisIcon size={16} />,
-  laundry: <LaundryIcon size={16} />,
-  parking: <ParkingIcon size={16} />,
-};
-
-const serviceLabels: Record<string, string> = {
-  wifi: "Wi-Fi",
-  aquapark: "Басейн",
-  tennis_court: "Теніс",
-  laundry: "Пральня",
-  parking: "Парковка",
-};
 
 function Tour() {
   const { priceId, hotelId } = useParams();
@@ -92,7 +70,7 @@ function Tour() {
         services={activeServices}
         showLink={false}
       />
-      <Button to="/" variant="secondary" size="sm">
+      <Button to="/" variant="secondary" size="sm" className="tour-page__btn">
         ← Назад до пошуку
       </Button>
     </div>

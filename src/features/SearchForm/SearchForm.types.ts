@@ -8,8 +8,8 @@ export interface SearchFormProps {
   placeholder?: string;
   buttonText?: string;
   emptyText?: string;
+  initialSelected?: DropdownItem | null;
   onSubmit?: (item: DropdownItem) => void;
   getIconByType?: (type?: string) => ReactNode;
   className?: string;
-  initialSelected?: DropdownItem | null;
 }

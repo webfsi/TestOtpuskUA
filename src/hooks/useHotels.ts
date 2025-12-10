@@ -32,7 +32,7 @@ export const useHotels = () => {
 
     try {
       const res = await getHotels(countryId);
-      const hotels: HotelsMap = await res.json();
+      const hotels: HotelsMap = await (res as Response).json();
 
       cache[countryId] = hotels;
 

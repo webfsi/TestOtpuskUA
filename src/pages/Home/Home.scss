@@ -7,28 +7,3 @@
   gap: $spacing-16;
   width: 100%;
 }
-
-.home {
-  padding: $spacing-32;
-  @include flex-column;
-  align-items: center;
-  gap: $spacing-24;
-  max-width: 800px;
-  margin: 0 auto;
-
-  h1 {
-    text-align: center;
-  }
-
-  &__results {
-    width: 100%;
-
-    pre {
-      background: $color-gray-100;
-      padding: $spacing-16;
-      border-radius: $border-radius-base;
-      overflow-x: auto;
-      font-size: $font-size-sm;
-    }
-  }
-}

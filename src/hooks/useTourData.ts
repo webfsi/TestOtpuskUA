@@ -29,9 +29,9 @@ export const useTourData = (priceId: string | null, hotelId: string | null) => {
         getCountries(),
       ]);
 
-      const priceData = await priceRes.json();
-      const hotelData = await hotelRes.json();
-      const countriesData: CountriesMap = await countriesRes.json();
+      const priceData = await (priceRes as Response).json();
+      const hotelData = await (hotelRes as Response).json();
+      const countriesData: CountriesMap = await (countriesRes as Response).json();
       const countryFlag = countriesData[hotelData.countryId]?.flag;
 
       setState({

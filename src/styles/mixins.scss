@@ -1,122 +1,146 @@
-@use './variables.scss' as *;
+@use "sass:math";
+@use "./variables.scss" as *;
 
 @mixin media($min: null, $max: null, $orient: null) {
-	@if $min == null and $orient == null {
-		@media (max-width: $max) {
-			@content;
-		}
-	} @else if $max == null and $orient == null {
-		@media (min-width: $min) {
-			@content;
-		}
-	} @else if $min == null and $max == null {
-		@media (orientation: $orient) {
-			@content;
-		}
-	} @else if $orient == null {
-		@media (min-width: $min) and (max-width: $max) {
-			@content;
-		}
-	} @else if $min == null {
-		@media (max-width: $max) and (orientation: $orient) {
-			@content;
-		}
-	} @else if $max == null {
-		@media (min-width: $min) and (orientation: $orient) {
-			@content;
-		}
-	} @else {
-		@media (min-width: $min) and (max-width: $max) and (orientation: $orient) {
-			@content;
-		}
-	}
+  @if $min == null and $orient == null {
+    @media (max-width: $max) {
+      @content;
+    }
+  } @else if $max == null and $orient == null {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else if $min == null and $max == null {
+    @media (orientation: $orient) {
+      @content;
+    }
+  } @else if $orient == null {
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  } @else if $min == null {
+    @media (max-width: $max) and (orientation: $orient) {
+      @content;
+    }
+  } @else if $max == null {
+    @media (min-width: $min) and (orientation: $orient) {
+      @content;
+    }
+  } @else {
+    @media (min-width: $min) and (max-width: $max) and (orientation: $orient) {
+      @content;
+    }
+  }
 }
 
 @mixin m-down($breakpoint) {
-	@include media($max: $breakpoint) {
-		@content;
-	}
+  @include media($max: $breakpoint) {
+    @content;
+  }
 }
 
 @mixin m-up($breakpoint) {
-	@include media($min: $breakpoint + 1px) {
-		@content;
-	}
+  @include media($min: $breakpoint + 1px) {
+    @content;
+  }
 }
 
 @mixin desktop {
-	@include m-up($b-desktop) {
-		@content;
-	}
+  @include m-up($b-desktop) {
+    @content;
+  }
 }
 
 @mixin laptop {
-	@include m-down($b-laptop) {
-		@content;
-	}
+  @include m-down($b-laptop) {
+    @content;
+  }
 }
 
 @mixin laptopMini {
-	@include m-down($b-laptop-mini) {
-		@content;
-	}
+  @include m-down($b-laptop-mini) {
+    @content;
+  }
 }
 
 @mixin tabletMaxi {
-	@include m-down($b-tablet-maxi) {
-		@content;
-	}
+  @include m-down($b-tablet-maxi) {
+    @content;
+  }
 }
 
 @mixin tablet {
-	@include m-down($b-tablet) {
-		@content;
-	}
+  @include m-down($b-tablet) {
+    @content;
+  }
 }
 
 @mixin tabletMini {
-	@include m-down($b-tablet-mini) {
-		@content;
-	}
+  @include m-down($b-tablet-mini) {
+    @content;
+  }
 }
 
 @mixin mobile {
-	@include m-down($b-mobile) {
-		@content;
-	}
+  @include m-down($b-mobile) {
+    @content;
+  }
 }
 
 @mixin flex-center {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @mixin flex-between {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 @mixin flex-column {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 @mixin text-truncate {
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 @mixin visually-hidden {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	padding: 0;
-	margin: -1px;
-	overflow: hidden;
-	clip: rect(0, 0, 0, 0);
-	white-space: nowrap;
-	border: 0;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+$rem-base: 16px;
+
+@function strip-unit($num) {
+  @return math.div($num, $num * 0 + 1);
+}
+
+@function f-clamp($min-size, $max-size, $min-width, $max-width) {
+  $min-s-srp: strip-unit($min-size);
+  $max-s-srp: strip-unit($max-size);
+  $min-w-srp: strip-unit($min-width);
+  $max-w-srp: strip-unit($max-width);
+  $size-difference: $max-s-srp - $min-s-srp;
+  $width-difference: $max-w-srp - $min-w-srp;
+  $vw-coefficient: math.div($size-difference, $width-difference) * 100;
+  $initial-offset: $min-s-srp - (math.div($min-w-srp, 100) * $vw-coefficient);
+
+  @return clamp(
+    #{$min-s-srp}px,
+    calc(#{$initial-offset}px + #{$vw-coefficient}vw),
+    #{$max-s-srp}px
+  );
 }

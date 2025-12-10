@@ -25,14 +25,14 @@ export const SearchForm: FC<SearchFormProps> = ({
   placeholder = "Оберіть напрямок",
   buttonText = "Знайти",
   emptyText = "Нічого не знайдено",
+  initialSelected,
   onSubmit,
   getIconByType = defaultGetIconByType,
   className = "",
-  initialSelected = null,
 }) => {
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState(initialSelected?.label || "");
   const [selectedItem, setSelectedItem] = useState<DropdownItem | null>(
-    initialSelected
+    initialSelected || null
   );
   const [items, setItems] = useState<DropdownItem[]>([]);
   const [countries, setCountries] = useState<DropdownItem[]>([]);
@@ -40,7 +40,7 @@ export const SearchForm: FC<SearchFormProps> = ({
 
   const loadCountries = useCallback(async () => {
     const response = await getCountries();
-    const data: CountriesMap = await response.json();
+    const data: CountriesMap = await (response as Response).json();
     const countryItems: DropdownItem[] = Object.values(data).map((country) => ({
       id: country.id,
       label: country.name,
@@ -57,13 +57,10 @@ export const SearchForm: FC<SearchFormProps> = ({
 
   useEffect(() => {
     if (initialSelected) {
-      setSelectedItem(initialSelected);
       setInputValue(initialSelected.label);
-      if (initialSelected.type === "country") {
-        setItems(countries);
-      }
+      setSelectedItem(initialSelected);
     }
-  }, [initialSelected, countries]);
+  }, [initialSelected]);
 
   useEffect(() => {
     if (selectedItem && inputValue !== selectedItem.label) {
@@ -77,7 +74,7 @@ export const SearchForm: FC<SearchFormProps> = ({
         return;
       }
       const response = await searchGeo(query);
-      const data: GeoResponse = await response.json();
+      const data: GeoResponse = await (response as Response).json();
       const geoItems: DropdownItem[] = Object.values(data).map((entity) => {
         const imageUrl =
           entity.type === "country" && "flag" in entity
@@ -99,11 +96,7 @@ export const SearchForm: FC<SearchFormProps> = ({
   const handleInputChange = (value: string) => {
     setInputValue(value);
     if (value.trim()) {
-      if (selectedItem?.type === "country") {
-        setItems(countries);
-      } else {
-        handleSearch(value);
-      }
+      handleSearch(value);
     } else {
       setItems(countries);
     }
@@ -129,7 +122,6 @@ export const SearchForm: FC<SearchFormProps> = ({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (selectedItem) {
-      console.log("Search:", selectedItem);
       onSubmit?.(selectedItem);
     }
   };

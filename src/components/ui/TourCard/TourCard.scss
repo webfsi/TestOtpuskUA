@@ -160,8 +160,10 @@
   }
 
   &--detailed &__price {
-    font-size: $font-size-xl;
-    color: $color-primary;
+    font-size: 30px;
+    @include mobile {
+      font-size: 20px;
+    }
   }
 
   &__link {

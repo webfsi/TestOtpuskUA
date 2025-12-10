@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { SearchForm } from "../../features/SearchForm";
 import { SearchResults } from "../../features/SearchResults";
 import { TourCard } from "../../components/ui/TourCard";
